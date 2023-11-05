@@ -1,0 +1,101 @@
+body {
+	display: flex;
+	flex-direction: column;
+}
+
+.tags-container {
+	border: solid 2.5px;
+	border-color: lightgrey;
+	border-radius: 5px;
+	padding: 7px;
+}
+
+.tag-btn {
+	background-color: rgb(0, 188, 212);
+	border: 0px;
+	padding: 8px;
+	color: white;
+	font-weight: bold;
+	font-size: 18px;
+	border-radius: 5px;
+	font-family: arial;
+	cursor: pointer;
+	margin: 4px;
+	transition: 0.5s;
+}
+
+/*.tag-btn:hover {
+	background-color: rgb(215 208 54);
+}*/
+
+.slider-container{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.rating-label {
+	font-weight: bold;
+	font-family: sans-serif;
+	font-size: 18px;
+}
+
+.handles-label {
+	font-weight: bold;
+	font-family: sans-serif;
+	font-size: 18px;
+}
+
+.add-handle-btn {
+	background-color: #00ff4c;
+	border: 0px;
+	border-radius: 3px;
+	padding: 7px 12px;
+	color: white;
+	font-weight: bold;
+	font-family: sans-serif;
+	font-size: 16px;
+	cursor: pointer;
+	transition: 0.5s;
+}
+
+.add-handle-btn:hover {
+	background-color: #16a942;
+}
+
+#handles {
+	height: 25px;
+	border: 3px solid lightgrey;
+	border-radius: 6px;
+}
+
+input {
+	font-size: 20px;
+}
+
+.handles-container {
+
+}
+
+.accepted-handles {
+	margin-top: 10px;
+	border: 4px solid grey;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+.accepted-handles-container {
+	margin-top: 10px;
+	border: 4px solid grey;
+	border-radius: 10px;
+	padding: 10px;
+	width: 120px;
+	height: 15px;
+}
+
+.problems-container {
+
+}
+
+.problem {
+	
+}
