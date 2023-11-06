@@ -7,24 +7,7 @@
 	<title>Codeforces Problem Selector</title>
 </head>
 <body>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
+	<p style="margin-top: 1000px;"></p>
 	<div class="tags-container">
 		<button class="tag-btn">2-sat</button>
 		<button class="tag-btn">binary search</button>
@@ -60,9 +43,15 @@
 		<button class="tag-btn">trees</button>
 		<button class="tag-btn">two pointers</button>
 	</div>
-	<div class="slider-container">
+	<div class="rating-slider-container">
 		<label for="rating" class="rating-label">Rating 800 - 3500</label>
 		<input type="range" class="rating" id="rating" min="800" max="3500"step="100">
+	</div>
+	<div class="prob-num-slider-container">
+		<label for="prob-num" class="prob-num-label">
+			Number of problems 1 - 50
+		</label>
+		<input type="range" class="prob-num" id="prob-num" min="1" max="50"step="1">
 	</div>
 	<div class="handles-container">
 		<label for="handles" class="handles-label">Handles (not solved by)</label>
@@ -70,25 +59,169 @@
 		<button class="add-handle-btn">Add</button>
 		<div class="accepted-handles">
 			<!-- TODO -->
-			<div class="accepted-handles-container"></div>
-		</div>
-		<span style="margin-left: 600px;">* to remove a handle, click on it</span>
+			<div class="accepted-handle tooltip">
+				Mohab_Yaser
+				<span class="tooltiptext">
+					Click to remove
+				</span>
+			</div>
+
+			<div class="accepted-handle tooltip">
+				Mohab_Yaser
+				<span class="tooltiptext">
+					Click to remove
+				</span>
+			</div>
+
+			<div class="accepted-handle tooltip">
+				Mohab_Yaser
+				<span class="tooltiptext">
+					Click to remove
+				</span>
+			</div>
+
+			<div class="accepted-handle tooltip">
+				Mohab_Yaser
+				<span class="tooltiptext">
+					Click to remove
+				</span>
+			</div>
+
+			<div class="accepted-handle tooltip">
+				Mohab_Yaser
+				<span class="tooltiptext">
+					Click to remove
+				</span>
+			</div>
+
+			<div class="accepted-handle tooltip">
+				Mohab_Yaser
+				<span class="tooltiptext">
+					Click to remove
+				</span>
+			</div>
+
+			<div class="accepted-handle tooltip">
+				Mohab_Yaser
+				<span class="tooltiptext">
+					Click to remove
+				</span>
+			</div>
+
+			<div class="accepted-handle tooltip">
+				Mohab_Yaser
+				<span class="tooltiptext">
+					Click to remove
+				</span>
+			</div>
+
+		<!-- <span style="margin-left: 600px;">* to remove a handle, click on it</span> -->
+	</div>
+	<div class="gen-btn-container">
+		<button class="gen-btn">Generate</button>
 	</div>
 	<div class="problems-container">
-		<div class="problem"></div>
+		<div class="problem">
+			<button class="code-btn tooltip">Code 
+				<span class="tooltiptext">
+					Click to copy problem code
+				</span>
+			</button>
+			<button class="link-btn tooltip">
+				Link
+				<span class="tooltiptext">Go to problem</span>
+			</button>
+			<button class="tags-btn tooltip">
+				Hover to see tags
+				<span class="tooltiptext">tags</span>
+			</button>
+			<button class="rate-btn tooltip">
+				Hover to see rating
+				<span class="tooltiptext">rate</span>
+			</button>
+		</div>
+
+		<div class="problem">
+			<button class="code-btn tooltip">Code 
+				<span class="tooltiptext">
+					Click to copy problem code
+				</span>
+			</button>
+			<button class="link-btn tooltip">
+				Link
+				<span class="tooltiptext">Go to problem</span>
+			</button>
+			<button class="tags-btn tooltip">
+				Hover to see tags
+				<span class="tooltiptext">tags</span>
+			</button>
+			<button class="rate-btn tooltip">
+				Hover to see rating
+				<span class="tooltiptext">rate</span>
+			</button>
+		</div>
+
+		<div class="problem">
+			<button class="code-btn tooltip">Code 
+				<span class="tooltiptext">
+					Click to copy problem code
+				</span>
+			</button>
+			<button class="link-btn tooltip">
+				Link
+				<span class="tooltiptext">Go to problem</span>
+			</button>
+			<button class="tags-btn tooltip">
+				Hover to see tags
+				<span class="tooltiptext">tags</span>
+			</button>
+			<button class="rate-btn tooltip">
+				Hover to see rating
+				<span class="tooltiptext">rate</span>
+			</button>
+		</div>
+
+		<div class="problem">
+			<button class="code-btn tooltip">Code 
+				<span class="tooltiptext">
+					Click to copy problem code
+				</span>
+			</button>
+			<button class="link-btn tooltip">
+				Link
+				<span class="tooltiptext">Go to problem</span>
+			</button>
+			<button class="tags-btn tooltip">
+				Hover to see tags
+				<span class="tooltiptext">tags</span>
+			</button>
+			<button class="rate-btn tooltip">
+				Hover to see rating
+				<span class="tooltiptext">rate</span>
+			</button>
+		</div>
+
+		<div class="problem">
+			<button class="code-btn tooltip">Code 
+				<span class="tooltiptext">
+					Click to copy problem code
+				</span>
+			</button>
+			<button class="link-btn tooltip">
+				Link
+				<span class="tooltiptext">Go to problem</span>
+			</button>
+			<button class="tags-btn tooltip">
+				Hover to see tags
+				<span class="tooltiptext">tags</span>
+			</button>
+			<button class="rate-btn tooltip">
+				Hover to see rating
+				<span class="tooltiptext">rate</span>
+			</button>
+		</div>
 	</div>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
+	<p style="margin-top: 1000px;"></p>
 	<script src="main.js"></script>
 	<script type="module" src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
