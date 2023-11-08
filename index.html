@@ -7,222 +7,36 @@
 	<title>Codeforces Problem Selector</title>
 </head>
 <body>
-	<p style="margin-top: 1000px;"></p>
-	<div class="tags-container">
-		<button class="tag-btn">2-sat</button>
-		<button class="tag-btn">binary search</button>
-		<button class="tag-btn">bitmasks</button>
-		<button class="tag-btn">brute force</button>
-		<button class="tag-btn">combinatorics</button>
-		<button class="tag-btn">constructive algorithms</button>
-		<button class="tag-btn">data structures</button>
-		<button class="tag-btn">dfs and similar</button>
-		<button class="tag-btn">divide and conquer</button>
-		<button class="tag-btn">dp</button>
-		<button class="tag-btn">dsu</button>
-		<button class="tag-btn">expression parsing</button>
-		<button class="tag-btn">fft</button>
-		<button class="tag-btn">flow</button>
-		<button class="tag-btn">games</button>
-		<button class="tag-btn">geometry</button>
-		<button class="tag-btn">graph matchings</button>
-		<button class="tag-btn">graphs</button>
-		<button class="tag-btn">greedy</button>
-		<button class="tag-btn">hashing</button>
-		<button class="tag-btn">implementation</button>
-		<button class="tag-btn">interactive</button>
-		<button class="tag-btn">math</button>
-		<button class="tag-btn">matrices</button>
-		<button class="tag-btn">number theory</button>
-		<button class="tag-btn">probability</button>
-		<button class="tag-btn">schedules</button>
-		<button class="tag-btn">shortest path</button>
-		<button class="tag-btn">sorting</button>
-		<button class="tag-btn">strings</button>
-		<button class="tag-btn">ternary search</button>
-		<button class="tag-btn">trees</button>
-		<button class="tag-btn">two pointers</button>
+	<div class="tags-container"></div>
+	<div class="rating-container">
+		<label for="" class="rating-label">Rating 800 - 3500</label>
+		<div style="margin: 4px; margin-left: 30px;">
+			<span class="some-class">From</span>
+			<input class="another-class" type="number" step="100" min="800" max="3500">
+		</div>
+
+		<div style="margin: 4px; margin-left: 30px;">
+			<span class="some-class">To</span>
+			<input class="another-class" type="number" step="100" min="800" max="3500" style="margin-left: 18px;">
+		</div>
 	</div>
-	<div class="rating-slider-container">
-		<label for="rating" class="rating-label">Rating 800 - 3500</label>
-		<input type="range" class="rating" id="rating" min="800" max="3500"step="100">
-	</div>
-	<div class="prob-num-slider-container">
-		<label for="prob-num" class="prob-num-label">
-			Number of problems 1 - 50
-		</label>
-		<input type="range" class="prob-num" id="prob-num" min="1" max="50"step="1">
+
+	<div class="prob-num-container">
+		<span class="prob-num-label">Number of problems (1 - 50)</span>
+		<input class="another-class" type="number" step="1" min="1" max="50">
 	</div>
 	<div class="handles-container">
 		<label for="handles" class="handles-label">Handles (not solved by)</label>
 		<input type="text" id="handles" placeholder=" Enter codeforces handles">
 		<button class="add-handle-btn">Add</button>
-		<div class="accepted-handles">
-			<!-- TODO -->
-			<div class="accepted-handle tooltip">
-				Mohab_Yaser
-				<span class="tooltiptext">
-					Click to remove
-				</span>
-			</div>
-
-			<div class="accepted-handle tooltip">
-				Mohab_Yaser
-				<span class="tooltiptext">
-					Click to remove
-				</span>
-			</div>
-
-			<div class="accepted-handle tooltip">
-				Mohab_Yaser
-				<span class="tooltiptext">
-					Click to remove
-				</span>
-			</div>
-
-			<div class="accepted-handle tooltip">
-				Mohab_Yaser
-				<span class="tooltiptext">
-					Click to remove
-				</span>
-			</div>
-
-			<div class="accepted-handle tooltip">
-				Mohab_Yaser
-				<span class="tooltiptext">
-					Click to remove
-				</span>
-			</div>
-
-			<div class="accepted-handle tooltip">
-				Mohab_Yaser
-				<span class="tooltiptext">
-					Click to remove
-				</span>
-			</div>
-
-			<div class="accepted-handle tooltip">
-				Mohab_Yaser
-				<span class="tooltiptext">
-					Click to remove
-				</span>
-			</div>
-
-			<div class="accepted-handle tooltip">
-				Mohab_Yaser
-				<span class="tooltiptext">
-					Click to remove
-				</span>
-			</div>
-
-		<!-- <span style="margin-left: 600px;">* to remove a handle, click on it</span> -->
+		<div class="accepted-handles"></div>
 	</div>
 	<div class="gen-btn-container">
 		<button class="gen-btn">Generate</button>
 	</div>
-	<div class="problems-container">
-		<div class="problem">
-			<button class="code-btn tooltip">Code 
-				<span class="tooltiptext">
-					Click to copy problem code
-				</span>
-			</button>
-			<button class="link-btn tooltip">
-				Link
-				<span class="tooltiptext">Go to problem</span>
-			</button>
-			<button class="tags-btn tooltip">
-				Hover to see tags
-				<span class="tooltiptext">tags</span>
-			</button>
-			<button class="rate-btn tooltip">
-				Hover to see rating
-				<span class="tooltiptext">rate</span>
-			</button>
-		</div>
+	<div class="problems-container"></div>
 
-		<div class="problem">
-			<button class="code-btn tooltip">Code 
-				<span class="tooltiptext">
-					Click to copy problem code
-				</span>
-			</button>
-			<button class="link-btn tooltip">
-				Link
-				<span class="tooltiptext">Go to problem</span>
-			</button>
-			<button class="tags-btn tooltip">
-				Hover to see tags
-				<span class="tooltiptext">tags</span>
-			</button>
-			<button class="rate-btn tooltip">
-				Hover to see rating
-				<span class="tooltiptext">rate</span>
-			</button>
-		</div>
-
-		<div class="problem">
-			<button class="code-btn tooltip">Code 
-				<span class="tooltiptext">
-					Click to copy problem code
-				</span>
-			</button>
-			<button class="link-btn tooltip">
-				Link
-				<span class="tooltiptext">Go to problem</span>
-			</button>
-			<button class="tags-btn tooltip">
-				Hover to see tags
-				<span class="tooltiptext">tags</span>
-			</button>
-			<button class="rate-btn tooltip">
-				Hover to see rating
-				<span class="tooltiptext">rate</span>
-			</button>
-		</div>
-
-		<div class="problem">
-			<button class="code-btn tooltip">Code 
-				<span class="tooltiptext">
-					Click to copy problem code
-				</span>
-			</button>
-			<button class="link-btn tooltip">
-				Link
-				<span class="tooltiptext">Go to problem</span>
-			</button>
-			<button class="tags-btn tooltip">
-				Hover to see tags
-				<span class="tooltiptext">tags</span>
-			</button>
-			<button class="rate-btn tooltip">
-				Hover to see rating
-				<span class="tooltiptext">rate</span>
-			</button>
-		</div>
-
-		<div class="problem">
-			<button class="code-btn tooltip">Code 
-				<span class="tooltiptext">
-					Click to copy problem code
-				</span>
-			</button>
-			<button class="link-btn tooltip">
-				Link
-				<span class="tooltiptext">Go to problem</span>
-			</button>
-			<button class="tags-btn tooltip">
-				Hover to see tags
-				<span class="tooltiptext">tags</span>
-			</button>
-			<button class="rate-btn tooltip">
-				Hover to see rating
-				<span class="tooltiptext">rate</span>
-			</button>
-		</div>
-	</div>
-	<p style="margin-top: 1000px;"></p>
 	<script src="main.js"></script>
-	<script type="module" src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<!-- <script type="module" src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
 </body>
 </html>

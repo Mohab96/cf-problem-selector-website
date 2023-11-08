@@ -4,7 +4,7 @@ import webbrowser
 import argparse
 
 # handles to choose problems not problems not solved by any one of them
-not_solved_by = ['wrong_handle']
+not_solved_by = ['Mohab_Yaser']
 
 # problems not solved by any handle in "not_solved_by"
 problems_out_of_scope = set([])

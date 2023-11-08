@@ -1,6 +1,9 @@
 body {
 	max-width: 800px;
+	min-width: 600px;
 	margin: auto;
+	margin-top: 100px;
+	margin-bottom: 100px;
 }
 
 .tags-container {
@@ -24,29 +27,17 @@ body {
 	transition: 0.5s;
 }
 
-.rating-slider-container{
+.rating-container{
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
 
-.prob-num-slider-container {
+.prob-num-container {
 	margin-top: 10px;
 	margin-bottom: 10px;	
 }
 
-.rating-label {
-	font-weight: bold;
-	font-family: sans-serif;
-	font-size: 18px;
-}
-
-.handles-label {
-	font-weight: bold;
-	font-family: sans-serif;
-	font-size: 18px;
-}
-
-.prob-num-label {
+.rating-label, .prob-num-label, .handles-label {
 	font-weight: bold;
 	font-family: sans-serif;
 	font-size: 18px;
@@ -81,7 +72,7 @@ input {
 
 .accepted-handles {
 	margin-top: 10px;
-	border: 4px solid grey;
+/*	border: 4px solid grey;*/
 	border-radius: 10px;
 	padding: 10px;
 }
@@ -110,15 +101,16 @@ input {
 }
 
 .problems-container {
+	min-width: 600px;
 	margin-top: 10px;
-	border: 4px solid grey;
+/*	border: 4px solid grey;*/
 	border-radius: 10px;
 	padding: 10px;
 	display: grid;
+	grid-template-columns: auto;
 }
 
 .problem {
-	display: grid;
 	margin: 3px;
 	border: 4px solid grey;
 	border-radius: 10px;
@@ -129,7 +121,7 @@ input {
 	transition: 0.5s;
 	cursor: pointer;
 	display: grid;
-	grid-template-columns: auto auto auto auto auto;
+	grid-template-columns: auto auto auto auto;
 }
 
 .tooltip {
@@ -151,7 +143,7 @@ input {
   border-radius: 6px;
   width: 120px;
   bottom: 130%;
-  left: 10%;
+  right: 10%;
   position: absolute;
   z-index: 1;
   transition: 0.5s;
@@ -253,4 +245,16 @@ input {
 
 .gen-btn:hover {
 	background-color: #e346e3;
+}
+
+.some-class {
+	font-size: 15px;
+	font-style: italic;
+}
+
+.another-class {
+	border: 2px solid lightgrey;
+	border-radius: 4px;
+	width: 50px;
+	font-size: 15px;
 }
