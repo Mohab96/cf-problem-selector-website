@@ -1,42 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="style.css">
-	<title>Codeforces Problem Selector</title>
-</head>
-<body>
-	<div class="tags-container"></div>
-	<div class="rating-container">
-		<label for="" class="rating-label">Rating 800 - 3500</label>
-		<div style="margin: 4px; margin-left: 30px;">
-			<span class="some-class">From</span>
-			<input class="another-class" type="number" step="100" min="800" max="3500">
-		</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Codeforces Problem Selector</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="tags-container"></div>
+    <div class="rating-container">
+      <label for="" class="rating-label">Rating 800 - 3500</label>
+      <div style="margin: 4px; margin-left: 30px">
+        <span class="some-class">From</span>
+        <input
+          class="another-class"
+          type="number"
+          step="100"
+          min="800"
+          max="3500"
+        />
+      </div>
 
-		<div style="margin: 4px; margin-left: 30px;">
-			<span class="some-class">To</span>
-			<input class="another-class" type="number" step="100" min="800" max="3500" style="margin-left: 18px;">
-		</div>
-	</div>
+      <div style="margin: 4px; margin-left: 30px">
+        <span class="some-class">To</span>
+        <input
+          class="another-class"
+          type="number"
+          step="100"
+          min="800"
+          max="3500"
+          style="margin-left: 18px"
+        />
+      </div>
+    </div>
 
-	<div class="prob-num-container">
-		<span class="prob-num-label">Number of problems (1 - 50)</span>
-		<input class="another-class" type="number" step="1" min="1" max="50">
-	</div>
-	<div class="handles-container">
-		<label for="handles" class="handles-label">Handles (not solved by)</label>
-		<input type="text" id="handles" placeholder=" Enter codeforces handles">
-		<button class="add-handle-btn">Add</button>
-		<div class="accepted-handles"></div>
-	</div>
-	<div class="gen-btn-container">
-		<button class="gen-btn">Generate</button>
-	</div>
-	<div class="problems-container"></div>
+    <div class="prob-num-container">
+      <span class="prob-num-label">Number of problems (1 - 50)</span>
+      <input class="another-class" type="number" step="1" min="1" max="50" />
+    </div>
+    <div class="handles-container">
+      <label for="handles" class="handles-label">Handles (not solved by)</label>
+      <input type="text" id="handles" placeholder=" Enter codeforces handles" />
+      <button class="add-handle-btn">Add</button>
+      <div class="accepted-handles"></div>
+    </div>
+    <div class="gen-btn-container">
+      <button class="gen-btn">Generate</button>
+    </div>
+    <div class="problems-container"></div>
 
-	<script src="main.js"></script>
-	<!-- <script type="module" src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
-</body>
+    <script src="main.js"></script>
+  </body>
 </html>
