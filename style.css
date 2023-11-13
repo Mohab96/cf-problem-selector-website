@@ -6,6 +6,10 @@ body {
 	margin-bottom: 100px;
 }
 
+a {
+	margin-top: 5px;
+}
+
 .tags-container {
 	border: solid 2.5px;
 	border-color: lightgrey;
@@ -62,12 +66,14 @@ body {
 
 #handles {
 	height: 25px;
+	width: 210px;
 	border: 3px solid lightgrey;
 	border-radius: 6px;
 }
 
 input {
-	font-size: 20px;
+	font-size: 19px;
+	font-family: calibri;
 }
 
 .accepted-handles {
@@ -169,24 +175,6 @@ input {
 }
 
 .code-btn:hover {
-	background-color: #16a942;
-}
-
-.link-btn {
-	width: 80px;
-	height: 30px;
-	border: 2px solid green;
-	border-radius: 100px;
-	background-color: #00ff4c;
-	color: white;
-	font-family: sans-serif;
-	font-weight: bold;
-	font-size: 17px;
-	cursor: pointer;
-	transition: 0.5s;
-}
-
-.link-btn:hover {
 	background-color: #16a942;
 }
 
