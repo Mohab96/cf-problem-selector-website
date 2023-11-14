@@ -64,6 +64,33 @@ function dummy_data() {
     btns[21].style.backgroundColor = green;
     btns[23].style.backgroundColor = green;
     btns[26].style.backgroundColor = green;
+
+    let problem_container = `
+        <div class="problem">
+          <button class="code-btn tooltip">
+            Copy Code
+          </button>
+          <button class="tags-btn tooltip">
+            Click to see tags
+          </button>
+          <button class="rate-btn tooltip">
+            Click to see rating
+          </button>
+          <a target="_blank" href="https://codeforces.com/problemset/problem/">
+            Go to problem
+          </a>
+      </div>`;
+
+    document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
+    document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
+    document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
+    document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
+    document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
+    document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
+    document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
+    document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
+    document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
+    document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
 }
 
 window.addEventListener("load", () => {
@@ -128,6 +155,16 @@ function add_handle(handle) {
     }
 }
 
+function already_entered(handle) {
+    let already_entered_handles = document.getElementsByClassName("accepted-handle tooltip");
+    for (let i = 0; i < already_entered_handles.length; i++) {
+        if (already_entered_handles[i].innerText == handle)
+            return true;
+    }
+
+    return false;
+}
+
 document
     .getElementsByClassName("add-handle-btn")[0]
     .addEventListener("click", async() => {
@@ -140,12 +177,18 @@ document
                 text: "Please Enter a handle!",
             });
         else {
-            const handle_state = await (valid_handle(handle));
-            if (!handle_state) {
+            const valid = await (valid_handle(handle));
+            if (!valid) {
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",
                     text: "Please Enter a valid handle!",
+                });
+            } else if (already_entered(handle)) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "You have already entered this handle before",
                 });
             } else
                 add_handle(handle);
@@ -185,6 +228,9 @@ function validate_input() {
 }
 
 function valid_problem(problem, min, max, problems_out_of_scope, chosen_tags) {
+    if (!problems_out_of_scope.has(problem['name']))
+        return false;
+
     problems_out_of_scope.forEach((element) => {
         if (element === problem['name'])
             return false;
@@ -254,10 +300,11 @@ async function get_problems() {
 
     let problemset = await http_request('https://codeforces.com/api/problemset.problems');
     let available_problems = [];
-    let [from, to] = document.getElementsByClassName("another-class");
+    let [from, to, problems_cnt] = document.getElementsByClassName("another-class");
 
     from = +from.value;
     to = +to.value;
+    problems_cnt = +problems_cnt.value;
 
     let min = Math.max(800, from);
     let max = Math.min(3500, to);
@@ -269,7 +316,15 @@ async function get_problems() {
 
     available_problems = shuffle(available_problems);
 
-    let problems_cnt = +(document.getElementsByClassName("another-class")[2].value);
+    if (available_problems.length < problems_cnt) {
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "There are not sufficient problems on the site with these criteria",
+        });
+
+        return false;
+    }
 
     let final_problems = available_problems.slice(0, problems_cnt);
 
@@ -279,14 +334,12 @@ async function get_problems() {
 function view_problems(problems) {
     let showed_tags = [];
     let showed_ratings = [];
+    let showed_codes = [];
     for (let i = 0; i < problems.length; i++) {
         let problem_container = `
         <div class="problem">
           <button class="code-btn tooltip">
-            Code 
-            <span class="tooltiptext">
-              Click to copy problem code
-            </span>
+            Copy Code
           </button>
           <button class="tags-btn tooltip">
             Click to see tags
@@ -301,6 +354,7 @@ function view_problems(problems) {
 
         showed_tags.push(problems[i]['tags']);
         showed_ratings.push(problems[i]['rating']);
+        showed_codes.push(`${problems[i]['contestId']}${problems[i]['index']}`);
 
         document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
     }
@@ -311,7 +365,9 @@ function view_problems(problems) {
         let btn = tags_btns[i];
 
         btn.addEventListener("click", () => {
-            Swal.fire({title: showed_tags[i]});
+            Swal.fire({
+                title: showed_tags[i]
+            });
         });
     }
 
@@ -324,6 +380,20 @@ function view_problems(problems) {
             Swal.fire(showed_ratings[i].toString());
         });
     }
+
+    let codes_btns = document.getElementsByClassName('code-btn tooltip');
+
+    for (let i = 0; i < codes_btns.length; i++) {
+        let btn = codes_btns[i];
+
+        btn.addEventListener("click", () => {
+            navigator.clipboard.writeText(showed_codes[i]);
+            Swal.fire({
+                title: "Code Copied",
+                icon: "success"
+            });
+        });
+    }
 }
 
 function remove_old_problems() {
@@ -334,6 +404,7 @@ document.getElementsByClassName("gen-btn")[0].addEventListener("click", async() 
     if (validate_input() === true) {
         remove_old_problems();
         let problems = await get_problems();
-        await view_problems(problems);
+        if (problems !== false)
+            await view_problems(problems);
     }
 });
