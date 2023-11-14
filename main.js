@@ -55,42 +55,42 @@ function dummy_data() {
     document.getElementsByClassName("another-class");
 
     from.value = '800';
-    to.value = '1000';
-    problems_cnt.value = '5';
+    to.value = '800';
+    problems_cnt.value = '2';
 
-    add_handle('Mohab_Yaser');
+    // add_handle('Mohab_Yaser');
 
-    let btns = document.getElementsByClassName("tag-btn");
-    btns[21].style.backgroundColor = green;
-    btns[23].style.backgroundColor = green;
-    btns[26].style.backgroundColor = green;
+    // let btns = document.getElementsByClassName("tag-btn");
+    // btns[21].style.backgroundColor = green;
+    // btns[23].style.backgroundColor = green;
+    // btns[26].style.backgroundColor = green;
 
-    let problem_container = `
-        <div class="problem">
-          <button class="code-btn tooltip">
-            Copy Code
-          </button>
-          <button class="tags-btn tooltip">
-            Click to see tags
-          </button>
-          <button class="rate-btn tooltip">
-            Click to see rating
-          </button>
-          <a target="_blank" href="https://codeforces.com/problemset/problem/">
-            Go to problem
-          </a>
-      </div>`;
+    // let problem_container = `
+    //     <div class="problem">
+    //       <button class="code-btn tooltip">
+    //         Copy Code
+    //       </button>
+    //       <button class="tags-btn tooltip">
+    //         Click to see tags
+    //       </button>
+    //       <button class="rate-btn tooltip">
+    //         Click to see rating
+    //       </button>
+    //       <a target="_blank" href="https://codeforces.com/problemset/problem/">
+    //         Go to problem
+    //       </a>
+    //   </div>`;
 
-    document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
-    document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
-    document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
-    document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
-    document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
-    document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
-    document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
-    document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
-    document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
-    document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
+    // document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
+    // document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
+    // document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
+    // document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
+    // document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
+    // document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
+    // document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
+    // document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
+    // document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
+    // document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
 }
 
 window.addEventListener("load", () => {
@@ -114,7 +114,7 @@ window.addEventListener("load", () => {
         });
     }
 
-    // dummy_data();
+    dummy_data();
 });
 
 function http_request(url) {
@@ -135,6 +135,9 @@ async function valid_handle(handle) {
 }
 
 function add_handle(handle) {
+    if (document.getElementsByClassName("accepted-handle tooltip").length === 0)
+        document.getElementsByClassName("accepted-handles")[0].style.display = 'block';
+
     document.getElementsByClassName(
         "accepted-handles"
     )[0].innerHTML += `<div class="accepted-handle tooltip">
@@ -151,6 +154,8 @@ function add_handle(handle) {
     for (let i = 0; i < acc_handles.length; i++) {
         acc_handles[i].addEventListener("click", (element) => {
             element.srcElement.remove();
+            if (document.getElementsByClassName("accepted-handle tooltip").length === 0)
+                document.getElementsByClassName("accepted-handles")[0].style.display = 'none';
         });
     }
 }
@@ -228,13 +233,8 @@ function validate_input() {
 }
 
 function valid_problem(problem, min, max, problems_out_of_scope, chosen_tags) {
-    if (!problems_out_of_scope.has(problem['name']))
+    if (problems_out_of_scope.has(problem['name']))
         return false;
-
-    problems_out_of_scope.forEach((element) => {
-        if (element === problem['name'])
-            return false;
-    });
 
     let rate = (problem['rating'] !== undefined ? problem['rating'] : 0);
 
@@ -332,6 +332,8 @@ async function get_problems() {
 }
 
 function view_problems(problems) {
+    document.getElementsByClassName('problems-container')[0].style.display = 'grid';
+
     let showed_tags = [];
     let showed_ratings = [];
     let showed_codes = [];
@@ -398,6 +400,7 @@ function view_problems(problems) {
 
 function remove_old_problems() {
     document.getElementsByClassName('problems-container')[0].innerHTML = '';
+    document.getElementsByClassName('problems-container')[0].style.display = 'none';
 }
 
 document.getElementsByClassName("gen-btn")[0].addEventListener("click", async() => {

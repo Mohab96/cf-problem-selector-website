@@ -89,18 +89,20 @@ input {
 }
 
 .accepted-handles {
+	display: none;
+	border: solid 2.5px lightgrey;
+	border-radius: 8px;
+	padding: 8px;
 	margin-top: 10px;
-/*  border: 4px solid grey; */
 	border-radius: 10px;
-	padding: 10px;
 }
 
 .accepted-handle {
 	display: grid;
 	margin-top: 3px;
 	margin-left: 3px;
-	border: 4px solid grey;
-	border-radius: 10px;
+	border: 3px solid lightgreen;
+	border-radius: 8px;
 	padding: 8px;
 	font-size: 16px;
 	font-family: 'Roboto', sans-serif;
@@ -111,20 +113,20 @@ input {
 }
 
 .accepted-handle:hover {
-	background-color: rgb(215 208 54);
+	background-color: #e1e179;
 }
 
 .accepted-handle:active {
-	background-color: red;
+	background-color: lightcoral;
 }
 
 .problems-container {
+	border: solid 2.5px lightgrey;
+	border-radius: 8px;
+	padding: 8px;
 	min-width: 600px;
 	margin-top: 10px;
-/*	border: 4px solid grey;*/
-	border-radius: 10px;
-	padding: 10px;
-	display: grid;
+	display: none;
 	grid-template-columns: auto;
 }
 
