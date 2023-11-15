@@ -6,13 +6,21 @@ body {
 	max-width: 800px;
 	min-width: 600px;
 	margin: auto;
-	margin-top: 100px;
-	margin-bottom: 100px;
+/*	margin-top: 100px;*/
+/*	margin-bottom: 100px;*/
 	padding: 8px;
 }
 
 a {
 	margin-top: 5px;
+}
+
+.head {
+	display: inline;
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	font-size: 45px;
+	font-weight: 500;
 }
 
 .tags-container {

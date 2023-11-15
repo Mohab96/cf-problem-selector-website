@@ -11,13 +11,32 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,100&display=swap" rel="stylesheet">
   </head>
   <body>
+    <div
+      style="
+        text-align: center;
+        margin-bottom: 5px;
+        ">
+      <span class = "head" style="color: #e5e512;">Codeforces</span>
+      <span class = "head" style="color: #5959cd;">Problem</span>
+      <span class = "head" style="color: #dd1818;">Selector</span>
+      <span style="
+      display: block;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 500;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      color: #4a4a4a;
+      font-size: 25px;
+      ">This app assists CPers in the process of choosing problems while training</span>
+    </div>
     <div class="tags-container"></div>
     <div class="temp">
       <div class="rating-container">
       <label for="" class="rating-label">Rating 800 - 3500</label>
       <div style="margin: 4px; margin-left: 30px">
-        <span class="some-class">From</span>
+        <label for="for" class="some-class">From</label>
         <input
+          id="for"
           class="another-class"
           type="number"
           step="100"
@@ -27,8 +46,9 @@
       </div>
 
       <div style="margin: 4px; margin-left: 30px">
-        <span class="some-class">To</span>
+        <label for="to" class="some-class">To</label>
         <input
+          id="to"
           class="another-class"
           type="number"
           step="100"
@@ -40,8 +60,8 @@
     </div>
 
     <div class="prob-num-container">
-      <span class="prob-num-label">Number of problems (1 - 50)</span>
-      <input class="another-class" type="number" step="1" min="1" max="50" />
+      <label for="prob-num" class="prob-num-label">Number of problems (1 - 50)</label>
+      <input id="prob-num" class="another-class" type="number" step="1" min="1" max="50" />
     </div>
     <div class="handles-container">
       <label for="handles" class="handles-label">Handles (not solved by)</label>
@@ -54,7 +74,6 @@
       <button class="gen-btn">Generate</button>
     </div>
     <div class="problems-container"></div>
-
     <script src="main.js"></script>
   </body>
 </html>

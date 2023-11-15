@@ -37,6 +37,15 @@ const tags_list = [
     "two pointers",
 ];
 
+
+function disableBtn(button) {
+    button.disabled = true;
+}
+
+function enableBtn(button) {
+    button.disabled = false;
+}
+
 const green = "rgb(51, 172, 113)";
 const blue = "rgb(0, 188, 212)";
 
@@ -60,10 +69,12 @@ function dummy_data() {
 
     // add_handle('Mohab_Yaser');
 
-    // let btns = document.getElementsByClassName("tag-btn");
-    // btns[21].style.backgroundColor = green;
-    // btns[23].style.backgroundColor = green;
-    // btns[26].style.backgroundColor = green;
+    document.getElementById("handles").value = 'Mohab_Yaser,Mostafa__Fouad,JOE002';
+
+    let btns = document.getElementsByClassName("tag-btn");
+    btns[21].style.backgroundColor = green;
+    btns[23].style.backgroundColor = green;
+    btns[26].style.backgroundColor = green;
 
     // let problem_container = `
     //     <div class="problem">
@@ -114,7 +125,7 @@ window.addEventListener("load", () => {
         });
     }
 
-    dummy_data();
+    // dummy_data();
 });
 
 function http_request(url) {
@@ -173,31 +184,39 @@ function already_entered(handle) {
 document
     .getElementsByClassName("add-handle-btn")[0]
     .addEventListener("click", async() => {
-        const handle = document.getElementById("handles").value;
+        disableBtn(document.getElementsByClassName("add-handle-btn")[0]);
+        let handles = document.getElementById("handles").value;
+        handles = handles.split(',');
+        handles = new Set(handles);
 
-        if (handle === "")
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Please Enter a handle!",
-            });
-        else {
-            const valid = await (valid_handle(handle));
-            if (!valid) {
+        handles.forEach(async (handle) => {
+            handle = handle.trim();
+            if (handle === "")
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",
-                    text: "Please Enter a valid handle!",
+                    text: "Please Enter a handle!",
                 });
-            } else if (already_entered(handle)) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "You have already entered this handle before",
-                });
-            } else
-                add_handle(handle);
-        }
+            else {
+                const valid = await (valid_handle(handle));
+                if (!valid) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Please Enter a valid handle!",
+                    });
+                } else if (already_entered(handle)) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "You have already entered this handle before",
+                    });
+                } else
+                    add_handle(handle);
+            }
+        });
+
+        enableBtn(document.getElementsByClassName("add-handle-btn")[0]);
     });
 
 function validate_input() {
@@ -404,10 +423,12 @@ function remove_old_problems() {
 }
 
 document.getElementsByClassName("gen-btn")[0].addEventListener("click", async() => {
+    disableBtn(document.getElementsByClassName("gen-btn")[0]);
     if (validate_input() === true) {
         remove_old_problems();
         let problems = await get_problems();
         if (problems !== false)
             await view_problems(problems);
     }
+    enableBtn(document.getElementsByClassName("gen-btn")[0]);
 });
