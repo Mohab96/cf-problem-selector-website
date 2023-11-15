@@ -159,10 +159,11 @@ function load_from_local_storage() {
     problems_cnt.value = localStorage.getItem('problems_cnt');
 
     let handles = localStorage.getItem('handles').trim().split(',');
-    console.log(handles);
 
-    for (let i = 0; i < handles.length; i++) {
-        add_handle(handles[i]);
+    if (handles.length > 1) {
+        for (let i = 0; i < handles.length; i++) {
+            add_handle(handles[i]);
+        }
     }
 }
 
