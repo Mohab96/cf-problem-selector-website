@@ -104,6 +104,68 @@ function dummy_data() {
     // document.getElementsByClassName('problems-container')[0].innerHTML += problem_container;
 }
 
+document.getElementsByClassName('storage-reset')[0].addEventListener('click',
+    () => {
+        localStorage.clear();
+    });
+
+document.getElementsByClassName('storage-save')[0].addEventListener('click',
+    () => {
+        let tags_btns = document.getElementsByClassName("tag-btn");
+        let tags = '';
+        for (let i = 0; i < tags_btns.length; i++) {
+            let tag = tags_btns[i];
+            if (tag.style.backgroundColor === green) {
+                tags += i.toString() + ',';
+            }
+        }
+
+        tags = tags.slice(0, -1);
+
+        let [from, to, problems_cnt] = document.getElementsByClassName("another-class");
+        from = from.value;
+        to = to.value;
+        problems_cnt = problems_cnt.value;
+
+        let found_handles = document.getElementsByClassName("accepted-handle tooltip");
+        let handles = '';
+
+        for (let i = 0; i < found_handles.length; i++) {
+            handles += found_handles[i].innerText + ',';
+        }
+
+        handles = handles.slice(0, -1);
+
+        localStorage.setItem('tags', tags);
+        localStorage.setItem('from', from);
+        localStorage.setItem('to', to);
+        localStorage.setItem('problems_cnt', problems_cnt);
+        localStorage.setItem('handles', handles);
+    });
+
+function load_from_local_storage() {
+    let tags_btns = document.getElementsByClassName("tag-btn");
+    let tags = localStorage.getItem('tags').split(',');
+
+    if (tags.length > 1) {
+        for (let i = 0; i < tags.length; i++) {
+            tags_btns[+tags[i]].style.backgroundColor = green;
+        }
+    }
+
+    let [from, to, problems_cnt] = document.getElementsByClassName("another-class");
+    from.value = localStorage.getItem('from');
+    to.value = localStorage.getItem('to');
+    problems_cnt.value = localStorage.getItem('problems_cnt');
+
+    let handles = localStorage.getItem('handles').trim().split(',');
+    console.log(handles);
+
+    for (let i = 0; i < handles.length; i++) {
+        add_handle(handles[i]);
+    }
+}
+
 window.addEventListener("load", () => {
     document.getElementsByClassName("tags-container")[0].innerHTML = tags();
 
@@ -125,6 +187,7 @@ window.addEventListener("load", () => {
         });
     }
 
+    load_from_local_storage();
     // dummy_data();
 });
 
@@ -189,7 +252,7 @@ document
         handles = handles.split(',');
         handles = new Set(handles);
 
-        handles.forEach(async (handle) => {
+        handles.forEach(async(handle) => {
             handle = handle.trim();
             if (handle === "")
                 Swal.fire({

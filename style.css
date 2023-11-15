@@ -6,8 +6,8 @@ body {
 	max-width: 800px;
 	min-width: 600px;
 	margin: auto;
-/*	margin-top: 100px;*/
-/*	margin-bottom: 100px;*/
+	margin-top: 50px;
+	margin-bottom: 50px;
 	padding: 8px;
 }
 
@@ -237,15 +237,16 @@ input {
 }
 
 .gen-btn-container {
+	display: block;
 	text-align: center;
 	margin: 10px;
 }
 
 .gen-btn {
-	width: 150px;
+	width: 180px;
 	height: 40px;
-	border: 3px solid;
-	border-radius: 10px;
+	border: 0px solid;
+	border-radius: 7px;
 	font-family: monospace;
 	font-weight: bold;
 	font-size: 20px;
@@ -269,3 +270,36 @@ input {
 	width: 50px;
 	font-size: 15px;
 }
+
+.storage-btns-container {
+	display: block;
+	text-align: center;
+}
+
+.storage-save, .storage-reset {
+	cursor: pointer;
+	width: 90px;
+	font-family: monospace;
+	height: 30px;
+	font-size: 18px;
+	font-weight: bold;
+	border: 0px solid grey;
+	border-radius: 7px;
+	transition: 0.5s;
+}
+
+.storage-reset {
+	background-color: lightcoral;
+}
+
+.storage-reset:hover {
+	background-color: #fd4a4a;
+}
+
+.storage-save {
+	background-color: lightgreen;
+}
+
+.storage-save:hover {
+	background-color: #4fff4f;
+} 
