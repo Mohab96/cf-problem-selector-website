@@ -160,10 +160,9 @@ function load_from_local_storage() {
 
     let handles = localStorage.getItem('handles').trim().split(',');
 
-    if (handles.length > 1) {
-        for (let i = 0; i < handles.length; i++) {
+    for (let i = 0; i < handles.length; i++) {
+        if (handles[i] != '')
             add_handle(handles[i]);
-        }
     }
 }
 
