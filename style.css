@@ -3,16 +3,41 @@ html {
 }
 
 body {
+	margin: 0px;
+}
+
+#second-body {
 	max-width: 800px;
 	min-width: 600px;
 	margin: auto;
-	margin-top: 50px;
-	margin-bottom: 50px;
-	padding: 8px;
+	padding: 10px;
 }
 
 a {
 	margin-top: 5px;
+}
+
+code {
+	background-color: #b5b5b5;
+	color: #343333;
+	border: 0.5px solid #b5b5b5;
+	border-radius: 3px;
+}
+
+li {
+	margin-top: 3px;
+}
+
+#help {
+	padding: 5px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	background-color: lightgrey;
+	border: 3px solid grey;
+	border-radius: 10px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
 }
 
 .head {
@@ -68,10 +93,10 @@ a {
 }
 
 .add-handle-btn {
-	background-color: #00ff4c;
+	background-color: #16a942;
 	border: 0px;
 	border-radius: 3px;
-	padding: 7px 12px;
+	padding: 4px 10px;
 	color: white;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 500;
@@ -81,7 +106,7 @@ a {
 }
 
 .add-handle-btn:hover {
-	background-color: #16a942;
+	background-color: green;
 }
 
 #handles {
@@ -107,8 +132,7 @@ input {
 
 .accepted-handle {
 	display: grid;
-	margin-top: 3px;
-	margin-left: 3px;
+	margin: 3px;
 	border: 3px solid lightgreen;
 	border-radius: 8px;
 	padding: 8px;
@@ -159,7 +183,6 @@ input {
 }
 
 .tooltip .tooltiptext {
-/*  visibility: hidden;*/
   display: none;
   background-color: #5d5e5d;
   color: #fff;
@@ -178,7 +201,6 @@ input {
 }
 
 .tooltip:hover .tooltiptext {
-/*  visibility: visible;*/
 	display: inline;
 }
 
@@ -303,3 +325,24 @@ input {
 .storage-save:hover {
 	background-color: #4fff4f;
 } 
+
+#github {
+  font-family: Roboto;
+  background-color: rgb(36, 41, 46);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ }
+
+#github span {
+  color: white;
+  user-select: none;
+  cursor: pointer;
+}
+
+#github img	{
+	width: 30px;
+	margin: 10px;
+  user-select: none;
+  cursor: pointer;
+}

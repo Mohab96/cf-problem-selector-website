@@ -216,9 +216,6 @@ function add_handle(handle) {
         "accepted-handles"
     )[0].innerHTML += `<div class="accepted-handle tooltip">
             ${handle}
-            <span class="tooltiptext">
-                Click to remove
-            </span>
         </div>`;
 
     document.getElementById("handles").value = "";
@@ -272,7 +269,7 @@ document
                     Swal.fire({
                         icon: "error",
                         title: "Oops...",
-                        text: "You have already entered this handle before",
+                        text: `You have already entered the handle ${handle} before`,
                     });
                 } else
                     add_handle(handle);
@@ -494,4 +491,12 @@ document.getElementsByClassName("gen-btn")[0].addEventListener("click", async() 
             await view_problems(problems);
     }
     enableBtn(document.getElementsByClassName("gen-btn")[0]);
+});
+
+document.querySelector('#github span').addEventListener('click', () => {
+    window.open('https://github.com/Mohab96', '_blank');
+});
+
+document.querySelector('#github img').addEventListener('click', () => {
+    window.open('https://github.com/Mohab96', '_blank');
 });

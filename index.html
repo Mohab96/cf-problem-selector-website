@@ -8,10 +8,11 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   </head>
   <body>
-    <div
+    <div id="second-body">
+      <div
       style="
         text-align: center;
         margin-bottom: 5px;
@@ -29,6 +30,46 @@
       font-size: 25px;
       ">This app assists CPers in the process of choosing problems while training</span>
     </div>
+    <div id="help">
+      <span style="
+        font-size: 25px;
+        font-weight: 700;
+        font-family: 'Roboto', sans-serif;
+        font-style: italic;
+      ">Getting started:</span>
+      <ul>
+        <li>You will get problems with the number you entered. </li>
+        <li>The problems you will get will have ratings between the boundaries you entered. </li>
+        <li>The problems won't be solved by any handle in the handles field. </li>
+        <li>You can enter handles one-by-one, or multiple handles comma-separated in one shot. </li>
+        <li>The 'Save' button will save your preferences locally and will be loaded automatically when you open/reload the site. </li>
+        <li>The 'Reset' button will remove what is stored locally. </li>
+        <li>The problems you will get won't have any tag which is not within selected tags. </li>
+        <li>
+          If the user selected <code>number theory</code>, <code>math</code>, and <code>dp</code>, then all these combinations are valid and can be seen in the outputted problems:
+          <ul>
+            <li> <code>number theory</code></li>
+            <li> <code>math</code></li>
+            <li> <code>dp</code></li>
+            <li> <code>dp</code>, <code>math</code></li>
+            <li> <code>dp</code>, <code>number theory</code></li>
+            <li> <code>math</code>, <code>number theory</code></li>
+            <li> <code>math</code>, <code>number theory</code>, <code>dp</code></li>
+          </ul>
+
+          but you wont see none of these:
+          <ul>
+            <li> <code>binary search</code>, <code>math</code></li>
+            <li> <code>combinatorics</code></li>
+            <li>etc.</li>
+          </ul>
+        <li>If no tags are selected, then all tags will be included by default as if you have selected all of them.</li>
+        <li>Only codeforces rated problems will be included.</li>
+        <li>Any problem with no tags will not be included.</li>
+        <li>To remove a handle, Click on it</li>
+      </ul>
+    </div>
+
     <div class="tags-container"></div>
     <div class="temp">
       <div class="rating-container">
@@ -64,7 +105,7 @@
       <input id="prob-num" class="another-class" type="number" step="1" min="1" max="50" />
     </div>
     <div class="handles-container">
-      <label for="handles" class="handles-label">Handles (not solved by)</label>
+      <label for="handles" class="handles-label">Handles </label>
       <input type="text" id="handles" placeholder=" Enter codeforces handles" />
       <button class="add-handle-btn">Add</button>
       <div class="accepted-handles"></div>
@@ -78,6 +119,12 @@
       <button class="storage-reset">Reset</button>
     </div>
     <div class="problems-container"></div>
+    </div>
+
+    <div id="github">
+      <img src="media/github-logo.png">
+      <span>MohabYaser</span>
+    </div>
     <script src="main.js"></script>
   </body>
 </html>
