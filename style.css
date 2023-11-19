@@ -8,7 +8,7 @@ body {
 
 #second-body {
 	max-width: 800px;
-	min-width: 600px;
+	/* min-width: 600px; */
 	margin: auto;
 	padding: 10px;
 }
@@ -332,7 +332,10 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: auto;
+  /* width: auto; */
+  margin-top: 50px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
  }
 
 #github span {
@@ -344,6 +347,6 @@ input {
 #github img	{
 	width: 30px;
 	margin: 10px;
-  user-select: none;
-  cursor: pointer;
+	user-select: none;
+	cursor: pointer;
 }
