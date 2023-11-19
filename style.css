@@ -332,6 +332,7 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: auto;
  }
 
 #github span {
