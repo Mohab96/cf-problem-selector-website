@@ -13,6 +13,13 @@ body {
 	padding: 10px;
 }
 
+#banner {
+	width: 850px;
+	margin-top: -150px;
+	margin-bottom: -150px;
+	margin-left: -25px;
+}
+
 a {
 	margin-top: 5px;
 }
@@ -29,11 +36,11 @@ li {
 }
 
 #help {
-	padding: 5px;
+	padding: 15px;
 	margin-top: 20px;
 	margin-bottom: 20px;
 	background-color: lightgrey;
-	border: 3px solid grey;
+	border: 0px;
 	border-radius: 10px;
 	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
@@ -93,7 +100,7 @@ li {
 }
 
 .add-handle-btn {
-	background-color: #16a942;
+	background-color: #24b93f;
 	border: 0px;
 	border-radius: 3px;
 	padding: 4px 10px;
@@ -106,7 +113,7 @@ li {
 }
 
 .add-handle-btn:hover {
-	background-color: green;
+	background-color: #0ddf4c;
 }
 
 #handles {
@@ -164,14 +171,13 @@ input {
 
 .problem {
 	margin: 5px;
-	border: 2.5px solid lightgrey;
+	border: 0px solid lightgrey;
 	border-radius: 6px;
 	padding: 5px;
 	font-size: 16px;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 500;
 	transition: 0.5s;
-	cursor: pointer;
 	display: grid;
 	grid-template-columns: auto auto auto auto;
 }
@@ -207,9 +213,9 @@ input {
 .code-btn {
 	width: 110px;
 	height: 30px;
-	border: 2px solid green;
+	border: 0px;
 	border-radius: 6px;
-	background-color: #00ff4c;
+	background-color: #24b93f;
 	color: white;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 500;
@@ -219,15 +225,15 @@ input {
 }
 
 .code-btn:hover {
-	background-color: #16a942;
+	background-color: #0ddf4c;
 }
 
 .tags-btn {
 	width: 170px;
 	height: 30px;
-	border: 2px solid green;
+	border: 0px;
 	border-radius: 6px;
-	background-color: #00ff4c;
+	background-color: #24b93f;
 	color: white;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 500;
@@ -237,15 +243,15 @@ input {
 }
 
 .tags-btn:hover {
-	background-color: #16a942;
+	background-color: #0ddf4c;
 }
 
 .rate-btn {
 	width: 170px;
 	height: 30px;
-	border: 2px solid green;
+	border: 0px;
 	border-radius: 6px;
-	background-color: #00ff4c;
+	background-color: #24b93f;
 	color: white;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 500;
@@ -255,7 +261,7 @@ input {
 }
 
 .rate-btn:hover {
-	background-color: #16a942;
+	background-color: #0ddf4c;
 }
 
 .gen-btn-container {
@@ -272,13 +278,13 @@ input {
 	font-family: monospace;
 	font-weight: bold;
 	font-size: 20px;
-	background-color: violet;
+	background-color: #d2cd2a;
 	cursor: pointer;
 	transition: 0.5s;
 }
 
 .gen-btn:hover {
-	background-color: #e346e3;
+	background-color:#e3dc1c;
 }
 
 .some-class {
@@ -311,19 +317,19 @@ input {
 }
 
 .storage-reset {
-	background-color: lightcoral;
+	background-color: #c53030;
 }
 
 .storage-reset:hover {
-	background-color: #fd4a4a;
+	background-color: #e84444;
 }
 
 .storage-save {
-	background-color: lightgreen;
+	background-color: #3691CF;
 }
 
 .storage-save:hover {
-	background-color: #4fff4f;
+	background-color: #39a6ee;
 } 
 
 #github {
