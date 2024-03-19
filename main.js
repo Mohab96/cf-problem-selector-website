@@ -484,22 +484,20 @@ function view_problems(problems) {
         });
     }
 
-    
+
     let codes_btns = document.getElementsByClassName("code-btn tooltip");
 
-  
-    for (let i = 0; i < codes_btns.length; i++) {
-        let btn = codes_btns[i];
-
+    // Converting the HTMLCollection to an array and iterate over each element using forEach
+    Array.from(codes_btns).forEach((btn, i) => {
         btn.addEventListener("click", () => {
-            // Using the index 'i' to access the corresponding code from the 'showed_codes' array
             navigator.clipboard.writeText(showed_codes[i]);
+
             Swal.fire({
-                title: "Code Copied", 
+                title: "Code Copied",
                 icon: "success",
             });
         });
-    }
+    });
 }
 
 function remove_old_problems() {
