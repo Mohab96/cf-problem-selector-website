@@ -78,7 +78,7 @@ function dummy_data() {
 
     let problem_container = `
         <div class="problem">
-          <button class="code-btn tooltip">
+          <button onclick = "navigator.clipboard.writeText(copyText.value);" class="code-btn tooltip">
             Copy Code
           </button>
           <button class="tags-btn tooltip">
@@ -430,6 +430,7 @@ async function get_problems() {
     return final_problems;
 }
 
+
 function view_problems(problems) {
     document.getElementsByClassName("problems-container")[0].style.display =
         "grid";
@@ -488,9 +489,9 @@ function view_problems(problems) {
 
     for (let i = 0; i < codes_btns.length; i++) {
         let btn = codes_btns[i];
-
+        // adding toString to fix the copy button bug
         btn.addEventListener("click", () => {
-            navigator.clipboard.writeText(showed_codes[i]);
+            navigator.clipboard.writeText(showed_codes[i].toString());
             Swal.fire({
                 title: "Code Copied",
                 icon: "success",
