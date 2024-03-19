@@ -60,7 +60,7 @@ function tags() {
 
 function dummy_data() {
     let [from, to, problems_cnt] =
-    document.getElementsByClassName("another-class");
+        document.getElementsByClassName("another-class");
 
     from.value = "800";
     to.value = "800";
@@ -135,7 +135,7 @@ document
         tags = tags.slice(0, -1);
 
         let [from, to, problems_cnt] =
-        document.getElementsByClassName("another-class");
+            document.getElementsByClassName("another-class");
         from = from.value;
         to = to.value;
         problems_cnt = problems_cnt.value;
@@ -174,7 +174,7 @@ function load_from_local_storage() {
     }
 
     let [from, to, problems_cnt] =
-    document.getElementsByClassName("another-class");
+        document.getElementsByClassName("another-class");
     from.value = localStorage.getItem("from");
     to.value = localStorage.getItem("to");
     problems_cnt.value = localStorage.getItem("problems_cnt");
@@ -230,7 +230,7 @@ async function valid_handle(handle) {
 function add_handle(handle) {
     if (document.getElementsByClassName("accepted-handle tooltip").length === 0)
         document.getElementsByClassName("accepted-handles")[0].style.display =
-        "block";
+            "block";
 
     document.getElementsByClassName(
         "accepted-handles"
@@ -249,7 +249,7 @@ function add_handle(handle) {
                 document.getElementsByClassName("accepted-handle tooltip").length === 0
             )
                 document.getElementsByClassName("accepted-handles")[0].style.display =
-                "none";
+                    "none";
         });
     }
 }
@@ -267,13 +267,13 @@ function already_entered(handle) {
 
 document
     .getElementsByClassName("add-handle-btn")[0]
-    .addEventListener("click", async() => {
+    .addEventListener("click", async () => {
         disableBtn(document.getElementsByClassName("add-handle-btn")[0]);
         let handles = document.getElementById("handles").value;
         handles = handles.split(",");
         handles = new Set(handles);
 
-        handles.forEach(async(handle) => {
+        handles.forEach(async (handle) => {
             handle = handle.trim();
             if (handle === "")
                 Swal.fire({
@@ -304,7 +304,7 @@ document
 
 function validate_input() {
     let [from, to, problems_cnt] =
-    document.getElementsByClassName("another-class");
+        document.getElementsByClassName("another-class");
 
     from = +from.value;
     to = +to.value;
@@ -375,7 +375,7 @@ async function get_problems() {
 
     let problems_out_of_scope = new Set();
 
-    not_solved_by.forEach(async(handle) => {
+    not_solved_by.forEach(async (handle) => {
         let url = `https://codeforces.com/api/user.status?handle=${handle}`;
         let submissions = await http_request(url);
         submissions["result"].forEach((submission) => {
@@ -399,7 +399,7 @@ async function get_problems() {
     );
     let available_problems = [];
     let [from, to, problems_cnt] =
-    document.getElementsByClassName("another-class");
+        document.getElementsByClassName("another-class");
 
     from = +from.value;
     to = +to.value;
@@ -484,15 +484,18 @@ function view_problems(problems) {
         });
     }
 
+    
     let codes_btns = document.getElementsByClassName("code-btn tooltip");
 
+  
     for (let i = 0; i < codes_btns.length; i++) {
         let btn = codes_btns[i];
 
         btn.addEventListener("click", () => {
+            // Using the index 'i' to access the corresponding code from the 'showed_codes' array
             navigator.clipboard.writeText(showed_codes[i]);
             Swal.fire({
-                title: "Code Copied",
+                title: "Code Copied", 
                 icon: "success",
             });
         });
@@ -507,7 +510,7 @@ function remove_old_problems() {
 
 document
     .getElementsByClassName("gen-btn")[0]
-    .addEventListener("click", async() => {
+    .addEventListener("click", async () => {
         disableBtn(document.getElementsByClassName("gen-btn")[0]);
         if (validate_input() === true) {
             remove_old_problems();
