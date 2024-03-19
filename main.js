@@ -78,7 +78,7 @@ function dummy_data() {
 
     let problem_container = `
         <div class="problem">
-          <button onclick = "navigator.clipboard.writeText(copyText.value);" class="code-btn tooltip">
+          <button class="code-btn tooltip">
             Copy Code
           </button>
           <button class="tags-btn tooltip">
