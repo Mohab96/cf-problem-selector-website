@@ -490,11 +490,25 @@ function view_problems(problems) {
         let btn = codes_btns[i];
 
         btn.addEventListener("click", () => {
+          // Check if clipboard API is supported [requires HTTPS]
+          if (navigator.clipboard) {
             navigator.clipboard.writeText(showed_codes[i]);
-            Swal.fire({
-                title: "Code Copied",
-                icon: "success",
-            });
+          }
+          // Fallback is the solution for browsers without clipboard API or insecure connections
+          else {
+            const textArea = document.createElement("textarea");
+            textArea.value = showed_codes[i];
+            document.body.appendChild(textArea);
+            textArea.select();
+    
+            document.execCommand("copy");
+    
+            document.body.removeChild(textArea);
+          }
+          Swal.fire({
+            title: "Code Copied",
+            icon: "success",
+          });
         });
     }
 }
