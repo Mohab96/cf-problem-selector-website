@@ -18,7 +18,7 @@
     <div id="second-body">
       <div style="text-align: center; margin-bottom: 5px">
         <img src="media/banner.png" alt="banner" id="banner" />
-        <span
+        <span id="description"
           style="
             display: block;
             font-family: 'Roboto', sans-serif;
@@ -39,10 +39,11 @@
             font-weight: 700;
             font-family: 'Roboto', sans-serif;
             font-style: italic;
-          "
-          >Getting started:</span
+            cursor: pointer;"
+          onclick="toggleHelp()"
+          >Getting started</span
         >
-        <ul>
+        <ul id="help-list" style="display: none;">
           <li>You will get problems with the number you entered.</li>
           <li>
             The problems you will get will have ratings between the boundaries
@@ -79,8 +80,7 @@
                 <code>math</code>, <code>number theory</code>, <code>dp</code>
               </li>
             </ul>
-
-            but you wont see any of these:
+              but you wont see any of these:
             <ul>
               <li><code>binary search</code>, <code>math</code></li>
               <li><code>combinatorics</code></li>
