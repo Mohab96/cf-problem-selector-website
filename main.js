@@ -46,6 +46,8 @@ function toggleHelp() {
   }
 }
 
+document.getElementById("expand-help").addEventListener("click", toggleHelp);
+
 function disableBtn(button) {
   button.disabled = true;
 }
