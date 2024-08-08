@@ -425,7 +425,7 @@ async function get_problems() {
 
   available_problems = shuffle(available_problems);
 
-  if (available_problems.length < problems_cnt) {
+  if (available_problems.length === 0) {
     Swal.fire({
       icon: "error",
       title: "Oops...",
@@ -434,8 +434,16 @@ async function get_problems() {
 
     return false;
   }
-
   let final_problems = available_problems.slice(0, problems_cnt);
+  if (available_problems.length < problems_cnt) {
+    Swal.fire({
+      icon: "warning",
+      title: "Limited Results",
+      text: `Only ${available_problems.length} problems are available, but you requested ${problems_cnt} problems. Please adjust your filters or check back later.`,
+    });
+
+    return final_problems;
+  }
 
   return final_problems;
 }
