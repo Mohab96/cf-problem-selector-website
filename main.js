@@ -441,8 +441,6 @@ async function get_problems() {
       title: "Limited Results",
       text: `Only ${available_problems.length} problems are available, but you requested ${problems_cnt} problems. Please adjust your filters or check back later.`,
     });
-
-    return final_problems;
   }
 
   return final_problems;
