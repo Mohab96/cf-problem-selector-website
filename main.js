@@ -434,7 +434,10 @@ async function get_problems() {
 
     return false;
   }
-  let final_problems = available_problems.slice(0, problems_cnt);
+  let final_problems = available_problems.slice(
+    0,
+    Math.min(problems_cnt, available_problems.length)
+  );
   if (available_problems.length < problems_cnt) {
     Swal.fire({
       icon: "warning",
