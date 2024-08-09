@@ -1,18 +1,13 @@
 # Codeforces Problem Selector
-
-![GitHub stars](https://img.shields.io/github/stars/Mohab96/cf-problem-selector-website?style=social)
-
-![GitHub forks](https://img.shields.io/github/forks/Mohab96/cf-problem-selector-website?style=social)
-
-# Preview
+## Preview
 
 ![](https://github.com/Mohab96/cf-problem-selector-website/blob/master/media/preview.gif)
 
-# Description
+## Description
 
 Codeforces Problem Selector is a web app that helps you find Codeforces rated problems based on your preferences. It allows you to customize your problem selection by setting rating boundaries, choosing specific tags, and selecting the number of problems. You can also include some Codeforces handles for more personalized recommendations.
 
-# How to use:
+## How to use:
 
 1. **Rating Boundaries:**
    - Set the minimum and maximum ratings for the Codeforces problems you want.
@@ -29,11 +24,11 @@ Codeforces Problem Selector is a web app that helps you find Codeforces rated pr
 5. **Save/Erased Preferences:**
    - Save or erase your preferences locally. This feature allows you to come back at any time and find your settings ready for you.
 
-## Output:
+### Output:
 
 The app generates (N) Codeforces rated problems with ratings between the specified minimum and maximum. The problems will only have the tags selected, and they must be unsolved by any of the provided Codeforces handles.
 
-### Valid Combinations:
+#### Valid Combinations:
 If, for example, the user selects `number theory`, `math`, and `dp`, the following combinations are valid:
 - `number theory`
 - `math`
@@ -51,5 +46,3 @@ This app addresses common issues faced while practicing on other platforms:
 - You know that the problems will not have any tag that you don't know, so you will not try to solve a problem for plenty of hours in vain! 
 
 *The approach in creating this app was to make it usable, focusing on practical features without overwhelming complexity.*
-
-# Try it out! [here](https://mohab96.github.io/cf-problem-selector-website/)
