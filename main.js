@@ -385,14 +385,15 @@ async function get_problems() {
 
   let problems_out_of_scope = new Set();
 
-  not_solved_by.forEach(async (handle) => {
+  for (let handle of not_solved_by) {
     let url = `https://codeforces.com/api/user.status?handle=${handle}`;
     let submissions = await http_request(url);
     submissions["result"].forEach((submission) => {
-      if (submission["verdict"] === "OK")
+      if (submission["verdict"] === "OK") {
         problems_out_of_scope.add(submission["problem"]["name"]);
+      }
     });
-  });
+  }
 
   let chosen_tags = new Set();
 
