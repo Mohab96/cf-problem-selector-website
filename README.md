@@ -9,20 +9,15 @@ Codeforces Problem Selector is a web app that helps you find Codeforces rated pr
 
 ## How to use:
 
-1. **Rating Boundaries:**
-   - Set the minimum and maximum ratings for the Codeforces problems you want.
+1. **Rating Boundaries:** Set the minimum and maximum ratings for the Codeforces problems you want.
 
-2. **Tags (Optional):**
-   - Choose specific tags for the problems. If no tags are selected, problems from all tags will be included.
+2. **Tags (Optional):** Choose specific tags for the problems. If no tags are selected, problems from all tags will be included.
 
-3. **Number of Problems (N):**
-   - Specify the number of Codeforces problems you want to generate.
+3. **Number of Problems (N):** Specify the number of Codeforces problems you want to generate.
 
-4. **Codeforces Handles (Optional):**
-   - Add one or more Codeforces handles, separated by commas. The app considers the problems unsolved by these handles.
+4. **Codeforces Handles (Optional):** Add one or more Codeforces handles, separated by commas. The app considers the problems unsolved by these handles.
 
-5. **Save/Erased Preferences:**
-   - Save or erase your preferences locally. This feature allows you to come back at any time and find your settings ready for you.
+5. **Save/Erased Preferences:** Save or erase your preferences locally. This feature allows you to come back at any time and find your settings ready for you.
 
 ### Output:
 
