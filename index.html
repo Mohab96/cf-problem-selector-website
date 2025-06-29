@@ -1,170 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <title>Codeforces Problem Selector</title>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="icon" type="image/png" href="./media/icon.png" />
-  </head>
-  <body>
-    <div id="second-body">
-      <div style="text-align: center; margin-bottom: 5px">
-        <img src="media/banner.png" alt="banner" id="banner" />
-        <span id="description"
-          style="
-            display: block;
-            font-family: 'Roboto', sans-serif;
-            font-weight: 500;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            color: #4a4a4a;
-            font-size: 25px;
-          "
-          >This app assists CPers in the process of choosing problems while
-          training</span
-        >
-      </div>
-      <div id="help">
-        <span id="expand-help"
-          style="
-            font-size: 25px;
-            font-weight: 700;
-            font-family: 'Roboto', sans-serif;
-            font-style: italic;
-            cursor: pointer;"
-          >Getting started</span
-        >
-        <ul id="help-list" style="display: none;">
-          <li>You will get problems with the number you entered.</li>
-          <li>
-            The problems you will get will have ratings between the boundaries
-            you entered.
-          </li>
-          <li>
-            The problems won't be solved by any handle in the handles field.
-          </li>
-          <li>
-            You can enter handles one-by-one, or multiple handles
-            comma-separated in one shot.
-          </li>
-          <li>
-            The 'Save' button will save your preferences locally and will be
-            loaded automatically when you open/reload the site.
-          </li>
-          <li>The 'Reset' button will remove what is stored locally.</li>
-          <li>
-            The problems you will get won't have any tag which is not within
-            selected tags.
-          </li>
-          <li>
-            If the user selected <code>number theory</code>, <code>math</code>,
-            and <code>dp</code>, then all these combinations are valid and can
-            be seen in the outputted problems:
-            <ul>
-              <li><code>number theory</code></li>
-              <li><code>math</code></li>
-              <li><code>dp</code></li>
-              <li><code>dp</code>, <code>math</code></li>
-              <li><code>dp</code>, <code>number theory</code></li>
-              <li><code>math</code>, <code>number theory</code></li>
-              <li>
-                <code>math</code>, <code>number theory</code>, <code>dp</code>
-              </li>
-            </ul>
-              but you wont see any of these:
-            <ul>
-              <li><code>binary search</code>, <code>math</code></li>
-              <li><code>combinatorics</code></li>
-              <li>etc.</li>
-            </ul>
-          </li>
 
-          <li>
-            If no tags are selected, then all tags will be included by default
-            as if you have selected all of them.
-          </li>
-          <li>Only codeforces rated problems will be included.</li>
-          <li>Any problem with no tags will not be included.</li>
-          <li>To remove a handle, Click on it</li>
-        </ul>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Codeforces Problem Selector</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet" />
+  <link rel="icon" type="image/png" href="./media/icon.png" />
+</head>
 
-      <div class="tags-container"></div>
-      <div class="temp">
-        <div class="rating-container">
-          <label for="" class="rating-label">Rating 800 - 3500</label>
-          <div style="margin: 4px; margin-left: 30px">
-            <label for="for" class="some-class">From</label>
-            <input
-              id="for"
-              class="another-class"
-              type="number"
-              step="100"
-              min="800"
-              max="3500"
-            />
-          </div>
-
-          <div style="margin: 4px; margin-left: 30px">
-            <label for="to" class="some-class">To</label>
-            <input
-              id="to"
-              class="another-class"
-              type="number"
-              step="100"
-              min="800"
-              max="3500"
-              style="margin-left: 18px"
-            />
-          </div>
-        </div>
-
-        <div class="prob-num-container">
-          <label for="prob-num" class="prob-num-label"
-            >Number of problems (1 - 50)</label
-          >
-          <input
-            id="prob-num"
-            class="another-class"
-            type="number"
-            step="1"
-            min="1"
-            max="50"
-          />
-        </div>
-        <div class="handles-container">
-          <label for="handles" class="handles-label">Handles </label>
-          <input
-            type="text"
-            id="handles"
-            placeholder=" Enter codeforces handles"
-          />
-          <button class="add-handle-btn">Add</button>
-          <div class="accepted-handles"></div>
-        </div>
+<body>
+  <div id="second-body">
+    <div class="header-section">
+      <img src="media/banner.png" alt="banner" id="banner" />
+      <span id="description">This app assists CPers in the process of choosing problems while training</span>
+      <div class="visitor-counter">
+        <span class="counter-icon">👥</span>
+        <span class="counter-text">Visitors: </span>
+        <span class="counter-number" id="visitor-count">0</span>
       </div>
-      <div class="gen-btn-container">
-        <button class="gen-btn">Generate</button>
-      </div>
-      <div class="storage-btns-container">
-        <button class="storage-save">Save</button>
-        <button class="storage-reset">Reset</button>
-      </div>
-      <div class="problems-container"></div>
     </div>
 
-    <div id="github">
-      <img src="media/github-logo.png" />
-      <span>MohabYaser</span>
+    <div id="help">
+      <span id="expand-help">Getting started</span>
+      <div id="help-list" style="display: none;">
+        <p>• You will receive the exact number of problems you specify.</p>
+        <p>• All problems will have ratings within the range you enter.</p>
+        <p>• Problems already solved by any handle you provide will be excluded.</p>
+        <p>• You can add handles one at a time, or enter multiple handles separated by commas.</p>
+        <p>• The <b>Save</b> button stores your preferences locally, so they are automatically loaded when you revisit
+          or reload the site.</p>
+        <p>• The <b>Reset</b> button clears your locally stored preferences.</p>
+        <p>• Only problems with tags you select will be included.</p>
+        <p>• For example, if you select <code>number theory</code>, <code>math</code>, and <code>dp</code>, you may
+          receive problems with any combination of these tags: <code>number theory</code>, <code>math</code>,
+          <code>dp</code>, <code>dp + math</code>, <code>dp + number theory</code>, <code>math + number theory</code>,
+          or <code>all three</code>.
+        </p>
+        <p>• You will <b>not</b> receive problems with unselected tags like <code>binary search + math</code> or
+          standalone <code>combinatorics</code>.</p>
+        <p>• If you do not select any tags, all tags will be included by default.</p>
+        <p>• Only rated Codeforces problems are included.</p>
+        <p>• Problems without tags are excluded.</p>
+        <p>• To remove a handle, simply click on it.</p>
+      </div>
     </div>
-    <script src="main.js"></script>
-  </body>
+
+    <div class="tags-container"></div>
+
+    <div class="temp">
+      <div class="accordion-section">
+        <div class="accordion-header" onclick="toggleAccordion('config')">
+          <span class="accordion-title">Configuration</span>
+          <!-- <span class="accordion-icon" id="config-icon">▼</span> -->
+        </div>
+        <div class="accordion-content" id="config-content">
+          <div class="form-row">
+            <div class="rating-container">
+              <div>
+                <label for="" class="rating-label">Rating Range</label>
+                <div style="display: flex; gap: 1rem; align-items: center; margin-top: 0.5rem;">
+                  <div>
+                    <label for="for" class="some-class">From</label>
+                    <input id="for" class="another-class" type="number" step="100" min="800" max="3500"
+                      placeholder="800" />
+                  </div>
+                  <div>
+                    <label for="to" class="some-class">To</label>
+                    <input id="to" class="another-class" type="number" step="100" min="800" max="3500"
+                      placeholder="3500" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="prob-num-container">
+              <label for="prob-num" class="prob-num-label">Number of problems</label>
+              <input id="prob-num" class="another-class" type="number" step="1" min="1" max="50" placeholder="5"
+                style="width: 100%; max-width: 200px;" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-section">
+        <div class="accordion-header" onclick="toggleAccordion('handles')">
+          <span class="accordion-title">Handles</span>
+          <!-- <span class="accordion-icon" id="handles-icon">▼</span> -->
+          <span class="handle-count" id="handle-count">(0 handles)</span>
+        </div>
+        <div class="accordion-content" id="handles-content">
+          <div class="handles-container">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;">
+              <input type="text" id="handles" placeholder="Enter codeforces handles" />
+              <button class="add-handle-btn">Add</button>
+            </div>
+            <div class="accepted-handles"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gen-btn-container">
+      <button class="gen-btn">Generate Problems</button>
+    </div>
+
+    <div class="storage-btns-container">
+      <button class="storage-save">Save</button>
+      <button class="storage-reset">Reset</button>
+    </div>
+
+    <div class="problems-container"></div>
+  </div>
+
+  <div id="github">
+    <img src="media/github-logo.png" alt="GitHub" />
+    <span>MohabYaser</span>
+  </div>
+  <script src="main.js"></script>
+</body>
+
 </html>

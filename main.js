@@ -39,10 +39,15 @@ const tags_list = [
 
 function toggleHelp() {
   let helpList = document.getElementById("help-list");
-  if (helpList.style.display === "none") {
+  let expandHelp = document.getElementById("expand-help");
+  
+  if (helpList.style.display === "none" || helpList.style.display === "") {
     helpList.style.display = "block";
+    expandHelp.classList.add("expanded");
+    helpList.classList.add("fade-in");
   } else {
     helpList.style.display = "none";
+    expandHelp.classList.remove("expanded");
   }
 }
 
@@ -50,10 +55,14 @@ document.getElementById("expand-help").addEventListener("click", toggleHelp);
 
 function disableBtn(button) {
   button.disabled = true;
+  button.style.opacity = "0.6";
+  button.style.cursor = "not-allowed";
 }
 
 function enableBtn(button) {
   button.disabled = false;
+  button.style.opacity = "1";
+  button.style.cursor = "pointer";
 }
 
 const green = "rgb(51, 172, 113)";
@@ -63,7 +72,7 @@ function tags() {
   let needed_html = "";
 
   tags_list.forEach((tag) => {
-    needed_html += `<button class="tag-btn">${tag}</button>`;
+    needed_html += `<button class="tag-btn" data-tag="${tag}">${tag}</button>`;
   });
 
   return needed_html;
@@ -83,22 +92,26 @@ function dummy_data() {
     "Mohab_Yaser,Mostafa__Fouad,JOE002";
 
   let btns = document.getElementsByClassName("tag-btn");
-  btns[21].style.backgroundColor = green;
-  btns[23].style.backgroundColor = green;
-  btns[26].style.backgroundColor = green;
+  btns[21].classList.add("selected");
+  btns[23].classList.add("selected");
+  btns[26].classList.add("selected");
 
   let problem_container = `
-        <div class="problem">
+        <div class="problem fade-in">
+          <div class="problem-info">
+            <h3>Problem Title</h3>
+            <p>Problem description goes here...</p>
+          </div>
           <button class="code-btn tooltip">
             Copy Code
           </button>
           <button class="tags-btn tooltip">
-            Click to see tags
+            View Tags
           </button>
           <button class="rate-btn tooltip">
-            Click to see rating
+            View Rating
           </button>
-          <a target="_blank" href="https://codeforces.com/problemset/problem/">
+          <a target="_blank" href="https://codeforces.com/problemset/problem/" class="problem-link">
             Go to problem
           </a>
       </div>`;
@@ -128,7 +141,21 @@ function dummy_data() {
 document
   .getElementsByClassName("storage-reset")[0]
   .addEventListener("click", () => {
-    localStorage.clear();
+    Swal.fire({
+      title: "Reset Preferences",
+      text: "Are you sure you want to reset all saved preferences?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#ef4444",
+      cancelButtonColor: "#6b7280",
+      confirmButtonText: "Yes, reset!",
+      cancelButtonText: "Cancel"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.clear();
+        location.reload();
+      }
+    });
   });
 
 document
@@ -138,7 +165,7 @@ document
     let tags = "";
     for (let i = 0; i < tags_btns.length; i++) {
       let tag = tags_btns[i];
-      if (tag.style.backgroundColor === green) {
+      if (tag.classList.contains("selected")) {
         tags += i.toString() + ",";
       }
     }
@@ -152,12 +179,12 @@ document
     problems_cnt = problems_cnt.value;
 
     let found_handles = document.getElementsByClassName(
-      "accepted-handle tooltip"
+      "accepted-handle"
     );
     let handles = "";
 
     for (let i = 0; i < found_handles.length; i++) {
-      handles += found_handles[i].innerText + ",";
+      handles += found_handles[i].innerText.replace("×", "").trim() + ",";
     }
 
     handles = handles.slice(0, -1);
@@ -167,6 +194,14 @@ document
     localStorage.setItem("to", to);
     localStorage.setItem("problems_cnt", problems_cnt);
     localStorage.setItem("handles", handles);
+    
+    Swal.fire({
+      title: "Preferences Saved!",
+      text: "Your preferences have been saved successfully.",
+      icon: "success",
+      timer: 2000,
+      showConfirmButton: false
+    });
   });
 
 function load_from_local_storage() {
@@ -179,20 +214,25 @@ function load_from_local_storage() {
 
   if (tags.length > 1) {
     for (let i = 0; i < tags.length; i++) {
-      tags_btns[+tags[i]].style.backgroundColor = green;
+      if (tags[i] !== "") {
+        tags_btns[+tags[i]].classList.add("selected");
+      }
     }
   }
 
   let [from, to, problems_cnt] =
     document.getElementsByClassName("another-class");
-  from.value = localStorage.getItem("from");
-  to.value = localStorage.getItem("to");
-  problems_cnt.value = localStorage.getItem("problems_cnt");
+  from.value = localStorage.getItem("from") || "";
+  to.value = localStorage.getItem("to") || "";
+  problems_cnt.value = localStorage.getItem("problems_cnt") || "";
 
-  let handles = localStorage.getItem("handles").trim().split(",");
+  let handles = localStorage.getItem("handles");
+  if (handles) {
+    handles = handles.trim().split(",");
 
-  for (let i = 0; i < handles.length; i++) {
-    if (handles[i] != "") add_handle(handles[i]);
+    for (let i = 0; i < handles.length; i++) {
+      if (handles[i] != "") add_handle(handles[i]);
+    }
   }
 }
 
@@ -204,14 +244,8 @@ window.addEventListener("load", () => {
   for (let i = 0; i < btns.length; i++) {
     let element = btns[i];
 
-    element.style.backgroundColor = blue;
-
     element.addEventListener("click", () => {
-      if (element.style.backgroundColor == blue) {
-        element.style.backgroundColor = green;
-      } else {
-        element.style.backgroundColor = blue;
-      }
+      element.classList.toggle("selected");
     });
   }
 
@@ -238,38 +272,41 @@ async function valid_handle(handle) {
 }
 
 function add_handle(handle) {
-  if (document.getElementsByClassName("accepted-handle tooltip").length === 0)
+  if (document.getElementsByClassName("accepted-handle").length === 0)
     document.getElementsByClassName("accepted-handles")[0].style.display =
       "block";
 
   document.getElementsByClassName(
     "accepted-handles"
-  )[0].innerHTML += `<div class="accepted-handle tooltip">
+  )[0].innerHTML += `<div class="accepted-handle fade-in">
             ${handle}
         </div>`;
 
   document.getElementById("handles").value = "";
 
-  let acc_handles = document.getElementsByClassName("accepted-handle tooltip");
+  let acc_handles = document.getElementsByClassName("accepted-handle");
 
   for (let i = 0; i < acc_handles.length; i++) {
     acc_handles[i].addEventListener("click", (element) => {
-      element.srcElement.remove();
-      if (
-        document.getElementsByClassName("accepted-handle tooltip").length === 0
-      )
-        document.getElementsByClassName("accepted-handles")[0].style.display =
-          "none";
+      element.target.style.transform = "scale(0.8)";
+      setTimeout(() => {
+        element.target.remove();
+        if (
+          document.getElementsByClassName("accepted-handle").length === 0
+        )
+          document.getElementsByClassName("accepted-handles")[0].style.display =
+            "none";
+      }, 200);
     });
   }
 }
 
 function already_entered(handle) {
   let already_entered_handles = document.getElementsByClassName(
-    "accepted-handle tooltip"
+    "accepted-handle"
   );
   for (let i = 0; i < already_entered_handles.length; i++) {
-    if (already_entered_handles[i].innerText == handle) return true;
+    if (already_entered_handles[i].innerText.replace("×", "").trim() == handle) return true;
   }
 
   return false;
@@ -312,6 +349,14 @@ document
     enableBtn(document.getElementsByClassName("add-handle-btn")[0]);
   });
 
+// Add Enter key support for handles input
+document.getElementById("handles").addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementsByClassName("add-handle-btn")[0].click();
+  }
+});
+
 function validate_input() {
   let [from, to, problems_cnt] =
     document.getElementsByClassName("another-class");
@@ -323,22 +368,22 @@ function validate_input() {
   if (from % 100 !== 0 || to % 100 !== 0 || from > to) {
     Swal.fire({
       icon: "error",
-      title: "Oops...",
-      text: "Please Enter a valid ratings!",
+      title: "Invalid Rating Range",
+      text: "Please enter valid ratings (must be multiples of 100 and 'from' must be less than 'to')!",
     });
     return false;
   } else if (from > 3500 || from < 800 || to > 3500 || to < 800) {
     Swal.fire({
       icon: "error",
-      title: "Oops...",
-      text: "Please Enter a valid rating boundaries (800 - 3500)!",
+      title: "Invalid Rating Boundaries",
+      text: "Please enter valid rating boundaries (800 - 3500)!",
     });
     return false;
   } else if (problems_cnt < 1 || problems_cnt > 50) {
     Swal.fire({
       icon: "error",
-      title: "Oops...",
-      text: "Enter a valid number of problems (1 - 50)!",
+      title: "Invalid Problem Count",
+      text: "Please enter a valid number of problems (1 - 50)!",
     });
     return false;
   } else return true;
@@ -377,10 +422,10 @@ function shuffle(array) {
 
 async function get_problems() {
   let not_solved_by = [];
-  let acc_handles = document.getElementsByClassName("accepted-handle tooltip");
+  let acc_handles = document.getElementsByClassName("accepted-handle");
 
   for (let i = 0; i < acc_handles.length; i++) {
-    not_solved_by.push(acc_handles[i].innerText);
+    not_solved_by.push(acc_handles[i].innerText.replace("×", "").trim());
   }
 
   let problems_out_of_scope = new Set();
@@ -388,18 +433,20 @@ async function get_problems() {
   for (let handle of not_solved_by) {
     let url = `https://codeforces.com/api/user.status?handle=${handle}`;
     let submissions = await http_request(url);
-    submissions["result"].forEach((submission) => {
-      if (submission["verdict"] === "OK") {
-        problems_out_of_scope.add(submission["problem"]["name"]);
-      }
-    });
+    if (submissions && submissions["result"]) {
+      submissions["result"].forEach((submission) => {
+        if (submission["verdict"] === "OK") {
+          problems_out_of_scope.add(submission["problem"]["name"]);
+        }
+      });
+    }
   }
 
   let chosen_tags = new Set();
 
   let all_tags = document.getElementsByClassName("tag-btn");
   for (let i = 0; i < all_tags.length; i++) {
-    if (all_tags[i].style.backgroundColor === green)
+    if (all_tags[i].classList.contains("selected"))
       chosen_tags.add(all_tags[i].innerText);
   }
 
@@ -419,18 +466,20 @@ async function get_problems() {
   let min = Math.max(800, from);
   let max = Math.min(3500, to);
 
-  problemset["result"]["problems"].forEach((problem) => {
-    if (valid_problem(problem, min, max, problems_out_of_scope, chosen_tags))
-      available_problems.push(problem);
-  });
+  if (problemset && problemset["result"] && problemset["result"]["problems"]) {
+    problemset["result"]["problems"].forEach((problem) => {
+      if (valid_problem(problem, min, max, problems_out_of_scope, chosen_tags))
+        available_problems.push(problem);
+    });
+  }
 
   available_problems = shuffle(available_problems);
 
   if (available_problems.length === 0) {
     Swal.fire({
       icon: "error",
-      title: "Oops...",
-      text: "There are not sufficient problems on the site with these criteria",
+      title: "No Problems Found",
+      text: "There are no problems available with the current criteria. Try adjusting your filters.",
     });
 
     return false;
@@ -452,24 +501,30 @@ async function get_problems() {
 
 function view_problems(problems) {
   document.getElementsByClassName("problems-container")[0].style.display =
-    "grid";
+    "block";
 
   let showed_tags = [];
   let showed_ratings = [];
   let showed_codes = [];
+  let showed_names = [];
+  
   for (let i = 0; i < problems.length; i++) {
     let problem_container = `
-        <div class="problem">
+        <div class="problem fade-in">
+          <div class="problem-info">
+            <h3>${problems[i]["name"]}</h3>
+            <p>Contest: ${problems[i]["contestId"]}</p>
+          </div>
           <button class="code-btn tooltip">
             Copy Code
           </button>
           <button class="tags-btn tooltip">
-            Click to see tags
+            View Tags
           </button>
           <button class="rate-btn tooltip">
-            Click to see rating
+            View Rating
           </button>
-          <a target="_blank" href="https://codeforces.com/problemset/problem/${problems[i]["contestId"]}/${problems[i]["index"]}">
+          <a target="_blank" href="https://codeforces.com/problemset/problem/${problems[i]["contestId"]}/${problems[i]["index"]}" class="problem-link">
             Go to problem
           </a>
       </div>`;
@@ -477,6 +532,7 @@ function view_problems(problems) {
     showed_tags.push(problems[i]["tags"]);
     showed_ratings.push(problems[i]["rating"]);
     showed_codes.push(`${problems[i]["contestId"]}${problems[i]["index"]}`);
+    showed_names.push(problems[i]["name"]);
 
     document.getElementsByClassName("problems-container")[0].innerHTML +=
       problem_container;
@@ -489,7 +545,9 @@ function view_problems(problems) {
 
     btn.addEventListener("click", () => {
       Swal.fire({
-        title: showed_tags[i],
+        title: "Problem Tags",
+        html: `<div style="text-align: left;">${showed_tags[i].map(tag => `<span style="display: inline-block; background: #6366f1; color: white; padding: 4px 8px; margin: 2px; border-radius: 4px; font-size: 12px;">${tag}</span>`).join('')}</div>`,
+        confirmButtonText: "Close"
       });
     });
   }
@@ -500,7 +558,12 @@ function view_problems(problems) {
     let btn = ratings_btns[i];
 
     btn.addEventListener("click", () => {
-      Swal.fire(showed_ratings[i].toString());
+      Swal.fire({
+        title: "Problem Rating",
+        text: `Rating: ${showed_ratings[i]}`,
+        icon: "info",
+        confirmButtonText: "Close"
+      });
     });
   }
 
@@ -526,8 +589,11 @@ function view_problems(problems) {
         document.body.removeChild(textArea);
       }
       Swal.fire({
-        title: "Code Copied",
+        title: "Code Copied!",
+        text: `Problem code "${showed_codes[i]}" has been copied to clipboard.`,
         icon: "success",
+        timer: 2000,
+        showConfirmButton: false
       });
     });
   }
@@ -543,11 +609,20 @@ document
   .getElementsByClassName("gen-btn")[0]
   .addEventListener("click", async () => {
     disableBtn(document.getElementsByClassName("gen-btn")[0]);
+    
+    // Show loading state
+    const genBtn = document.getElementsByClassName("gen-btn")[0];
+    const originalText = genBtn.textContent;
+    genBtn.textContent = "Generating...";
+    
     if (validate_input() === true) {
       remove_old_problems();
       let problems = await get_problems();
       if (problems !== false) await view_problems(problems);
     }
+    
+    // Restore button state
+    genBtn.textContent = originalText;
     enableBtn(document.getElementsByClassName("gen-btn")[0]);
   });
 
@@ -557,4 +632,124 @@ document.querySelector("#github span").addEventListener("click", () => {
 
 document.querySelector("#github img").addEventListener("click", () => {
   window.open("https://github.com/Mohab96", "_blank");
+});
+
+// Visitor Counter Functionality
+function updateVisitorCount() {
+  // Get current visitor count from localStorage
+  let visitorCount = localStorage.getItem('visitorCount');
+  
+  // If no count exists, initialize it
+  if (!visitorCount) {
+    visitorCount = 0;
+  } else {
+    visitorCount = parseInt(visitorCount);
+  }
+  
+  // Increment the count for this visit
+  visitorCount++;
+  
+  // Save the updated count
+  localStorage.setItem('visitorCount', visitorCount.toString());
+  
+  // Update the display
+  const counterElement = document.getElementById('visitor-count');
+  if (counterElement) {
+    // Animate the number change
+    animateNumber(counterElement, parseInt(localStorage.getItem('visitorCount') || 0) - 1, visitorCount);
+  }
+}
+
+function animateNumber(element, start, end) {
+  const duration = 1000; // 1 second
+  const startTime = performance.now();
+  
+  function updateNumber(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    
+    // Easing function for smooth animation
+    const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+    const current = Math.floor(start + (end - start) * easeOutQuart);
+    
+    element.textContent = current.toLocaleString();
+    
+    if (progress < 1) {
+      requestAnimationFrame(updateNumber);
+    }
+  }
+  
+  requestAnimationFrame(updateNumber);
+}
+
+// Initialize visitor count when page loads
+window.addEventListener('load', () => {
+  updateVisitorCount();
+  
+  // Also initialize the display for existing visitors
+  const visitorCount = localStorage.getItem('visitorCount') || 0;
+  const counterElement = document.getElementById('visitor-count');
+  if (counterElement) {
+    counterElement.textContent = parseInt(visitorCount).toLocaleString();
+  }
+});
+
+// Accordion Functionality
+function toggleAccordion(sectionId) {
+  const content = document.getElementById(`${sectionId}-content`);
+  const icon = document.getElementById(`${sectionId}-icon`);
+  
+  if (content.classList.contains('collapsed')) {
+    // Expand
+    content.classList.remove('collapsed');
+    icon.classList.remove('collapsed');
+  } else {
+    // Collapse
+    content.classList.add('collapsed');
+    icon.classList.add('collapsed');
+  }
+}
+
+// Update handle count display
+function updateHandleCount() {
+  const handleCount = document.getElementsByClassName('accepted-handle').length;
+  const countElement = document.getElementById('handle-count');
+  if (countElement) {
+    countElement.textContent = `(${handleCount} handle${handleCount !== 1 ? 's' : ''})`;
+  }
+}
+
+// Initialize accordion state
+window.addEventListener('load', () => {
+  // Start with Configuration expanded and Handles collapsed
+  const configContent = document.getElementById('config-content');
+  const handlesContent = document.getElementById('handles-content');
+  const configIcon = document.getElementById('config-icon');
+  const handlesIcon = document.getElementById('handles-icon');
+  
+  // Configuration starts expanded
+  configContent.classList.remove('collapsed');
+  configIcon.classList.remove('collapsed');
+  
+  // Handles starts collapsed
+  handlesContent.classList.add('collapsed');
+  handlesIcon.classList.add('collapsed');
+  
+  // Update initial handle count
+  updateHandleCount();
+});
+
+// Override the existing add_handle function to update count
+const originalAddHandle = add_handle;
+add_handle = function(handle) {
+  originalAddHandle.call(this, handle);
+  updateHandleCount();
+};
+
+// Also update count when handles are removed
+document.addEventListener('click', function(event) {
+  if (event.target.classList.contains('accepted-handle')) {
+    // Wait a bit for the removal animation to complete
+    setTimeout(updateHandleCount, 250);
+  }
 });
