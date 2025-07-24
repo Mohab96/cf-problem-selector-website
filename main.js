@@ -40,7 +40,7 @@ const tags_list = [
 function toggleHelp() {
   let helpList = document.getElementById("help-list");
   let expandHelp = document.getElementById("expand-help");
-  
+
   if (helpList.style.display === "none" || helpList.style.display === "") {
     helpList.style.display = "block";
     expandHelp.classList.add("expanded");
@@ -149,7 +149,7 @@ document
       confirmButtonColor: "#ef4444",
       cancelButtonColor: "#6b7280",
       confirmButtonText: "Yes, reset!",
-      cancelButtonText: "Cancel"
+      cancelButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.clear();
@@ -178,9 +178,7 @@ document
     to = to.value;
     problems_cnt = problems_cnt.value;
 
-    let found_handles = document.getElementsByClassName(
-      "accepted-handle"
-    );
+    let found_handles = document.getElementsByClassName("accepted-handle");
     let handles = "";
 
     for (let i = 0; i < found_handles.length; i++) {
@@ -194,13 +192,13 @@ document
     localStorage.setItem("to", to);
     localStorage.setItem("problems_cnt", problems_cnt);
     localStorage.setItem("handles", handles);
-    
+
     Swal.fire({
       title: "Preferences Saved!",
       text: "Your preferences have been saved successfully.",
       icon: "success",
       timer: 2000,
-      showConfirmButton: false
+      showConfirmButton: false,
     });
   });
 
@@ -291,9 +289,7 @@ function add_handle(handle) {
       element.target.style.transform = "scale(0.8)";
       setTimeout(() => {
         element.target.remove();
-        if (
-          document.getElementsByClassName("accepted-handle").length === 0
-        )
+        if (document.getElementsByClassName("accepted-handle").length === 0)
           document.getElementsByClassName("accepted-handles")[0].style.display =
             "none";
       }, 200);
@@ -302,11 +298,11 @@ function add_handle(handle) {
 }
 
 function already_entered(handle) {
-  let already_entered_handles = document.getElementsByClassName(
-    "accepted-handle"
-  );
+  let already_entered_handles =
+    document.getElementsByClassName("accepted-handle");
   for (let i = 0; i < already_entered_handles.length; i++) {
-    if (already_entered_handles[i].innerText.replace("×", "").trim() == handle) return true;
+    if (already_entered_handles[i].innerText.replace("×", "").trim() == handle)
+      return true;
   }
 
   return false;
@@ -350,12 +346,14 @@ document
   });
 
 // Add Enter key support for handles input
-document.getElementById("handles").addEventListener("keypress", function(event) {
-  if (event.key === "Enter") {
-    event.preventDefault();
-    document.getElementsByClassName("add-handle-btn")[0].click();
-  }
-});
+document
+  .getElementById("handles")
+  .addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      document.getElementsByClassName("add-handle-btn")[0].click();
+    }
+  });
 
 function validate_input() {
   let [from, to, problems_cnt] =
@@ -507,7 +505,7 @@ function view_problems(problems) {
   let showed_ratings = [];
   let showed_codes = [];
   let showed_names = [];
-  
+
   for (let i = 0; i < problems.length; i++) {
     let problem_container = `
         <div class="problem fade-in">
@@ -546,8 +544,13 @@ function view_problems(problems) {
     btn.addEventListener("click", () => {
       Swal.fire({
         title: "Problem Tags",
-        html: `<div style="text-align: left;">${showed_tags[i].map(tag => `<span style="display: inline-block; background: #6366f1; color: white; padding: 4px 8px; margin: 2px; border-radius: 4px; font-size: 12px;">${tag}</span>`).join('')}</div>`,
-        confirmButtonText: "Close"
+        html: `<div style="text-align: left;">${showed_tags[i]
+          .map(
+            (tag) =>
+              `<span style="display: inline-block; background: #6366f1; color: white; padding: 4px 8px; margin: 2px; border-radius: 4px; font-size: 12px;">${tag}</span>`
+          )
+          .join("")}</div>`,
+        confirmButtonText: "Close",
       });
     });
   }
@@ -562,7 +565,7 @@ function view_problems(problems) {
         title: "Problem Rating",
         text: `Rating: ${showed_ratings[i]}`,
         icon: "info",
-        confirmButtonText: "Close"
+        confirmButtonText: "Close",
       });
     });
   }
@@ -593,7 +596,7 @@ function view_problems(problems) {
         text: `Problem code "${showed_codes[i]}" has been copied to clipboard.`,
         icon: "success",
         timer: 2000,
-        showConfirmButton: false
+        showConfirmButton: false,
       });
     });
   }
@@ -609,18 +612,18 @@ document
   .getElementsByClassName("gen-btn")[0]
   .addEventListener("click", async () => {
     disableBtn(document.getElementsByClassName("gen-btn")[0]);
-    
+
     // Show loading state
     const genBtn = document.getElementsByClassName("gen-btn")[0];
     const originalText = genBtn.textContent;
     genBtn.textContent = "Generating...";
-    
+
     if (validate_input() === true) {
       remove_old_problems();
       let problems = await get_problems();
       if (problems !== false) await view_problems(problems);
     }
-    
+
     // Restore button state
     genBtn.textContent = originalText;
     enableBtn(document.getElementsByClassName("gen-btn")[0]);
@@ -634,121 +637,85 @@ document.querySelector("#github img").addEventListener("click", () => {
   window.open("https://github.com/Mohab96", "_blank");
 });
 
-// Visitor Counter Functionality
-function updateVisitorCount() {
-  // Get current visitor count from localStorage
-  let visitorCount = localStorage.getItem('visitorCount');
-  
-  // If no count exists, initialize it
-  if (!visitorCount) {
-    visitorCount = 0;
-  } else {
-    visitorCount = parseInt(visitorCount);
-  }
-  
-  // Increment the count for this visit
-  visitorCount++;
-  
-  // Save the updated count
-  localStorage.setItem('visitorCount', visitorCount.toString());
-  
-  // Update the display
-  const counterElement = document.getElementById('visitor-count');
-  if (counterElement) {
-    // Animate the number change
-    animateNumber(counterElement, parseInt(localStorage.getItem('visitorCount') || 0) - 1, visitorCount);
-  }
-}
-
 function animateNumber(element, start, end) {
   const duration = 1000; // 1 second
   const startTime = performance.now();
-  
+
   function updateNumber(currentTime) {
     const elapsed = currentTime - startTime;
     const progress = Math.min(elapsed / duration, 1);
-    
+
     // Easing function for smooth animation
     const easeOutQuart = 1 - Math.pow(1 - progress, 4);
     const current = Math.floor(start + (end - start) * easeOutQuart);
-    
+
     element.textContent = current.toLocaleString();
-    
+
     if (progress < 1) {
       requestAnimationFrame(updateNumber);
     }
   }
-  
+
   requestAnimationFrame(updateNumber);
 }
-
-// Initialize visitor count when page loads
-window.addEventListener('load', () => {
-  updateVisitorCount();
-  
-  // Also initialize the display for existing visitors
-  const visitorCount = localStorage.getItem('visitorCount') || 0;
-  const counterElement = document.getElementById('visitor-count');
-  if (counterElement) {
-    counterElement.textContent = parseInt(visitorCount).toLocaleString();
-  }
-});
 
 // Accordion Functionality
 function toggleAccordion(sectionId) {
   const content = document.getElementById(`${sectionId}-content`);
   const icon = document.getElementById(`${sectionId}-icon`);
-  
-  if (content.classList.contains('collapsed')) {
+
+  if (content.classList.contains("collapsed")) {
     // Expand
-    content.classList.remove('collapsed');
-    icon.classList.remove('collapsed');
+    content.classList.remove("collapsed");
+    icon.classList.remove("collapsed");
   } else {
     // Collapse
-    content.classList.add('collapsed');
-    icon.classList.add('collapsed');
+    content.classList.add("collapsed");
+    icon.classList.add("collapsed");
   }
 }
 
 // Update handle count display
 function updateHandleCount() {
-  const handleCount = document.getElementsByClassName('accepted-handle').length;
-  const countElement = document.getElementById('handle-count');
+  const handleCount = document.getElementsByClassName("accepted-handle").length;
+  const countElement = document.getElementById("handle-count");
   if (countElement) {
-    countElement.textContent = `(${handleCount} handle${handleCount !== 1 ? 's' : ''})`;
+    countElement.textContent = `(${handleCount} handle${
+      handleCount !== 1 ? "s" : ""
+    })`;
   }
 }
 
 // Initialize accordion state
-window.addEventListener('load', () => {
+window.addEventListener("load", () => {
   // Start with Configuration expanded and Handles collapsed
-  const configContent = document.getElementById('config-content');
-  const handlesContent = document.getElementById('handles-content');
-  const configIcon = document.getElementById('config-icon');
-  const handlesIcon = document.getElementById('handles-icon');
-  
+  const configContent = document.getElementById("config-content");
+  const handlesContent = document.getElementById("handles-content");
+  const configIcon = document.getElementById("config-icon");
+  const handlesIcon = document.getElementById("handles-icon");
+
   // Configuration starts expanded
-  configContent.classList.remove('collapsed');
-  configIcon.classList.remove('collapsed');
-  
+  configContent.classList.remove("collapsed");
+  configIcon.classList.remove("collapsed");
+
   // Handles starts collapsed
-  handlesContent.classList.add('collapsed');
-  handlesIcon.classList.add('collapsed');
-  
+  handlesContent.classList.add("collapsed");
+  handlesIcon.classList.add("collapsed");
+
   // Update initial handle count
   updateHandleCount();
 });
 
 // Override the existing add_handle function to update count
 const originalAddHandle = add_handle;
-add_handle = function(handle) {
+add_handle = function (handle) {
   originalAddHandle.call(this, handle);
   updateHandleCount();
 };
 
 // Also update count when handles are removed
-document.addEventListener('click', function(event) {
-  if (event.target.classList.contains('accepted-handle')) {
+document.addEventListener("click", function (event) {
+  if (event.target.classList.contains("accepted-handle")) {
     // Wait a bit for the removal animation to complete
     setTimeout(updateHandleCount, 250);
   }
